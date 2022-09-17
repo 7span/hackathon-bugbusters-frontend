@@ -99,12 +99,15 @@ export default {
           email: this.email,
           ip_address: this.ipAddress,
         })
-        .then(({ data }) => {
+        .then((res) => {
+          const data = res.data;
           this.$toast.success(
             "Login Successful. Welcome to TinyMiny Url Shortener."
           );
 
           localStorage.setItem("token", data.token);
+
+          this.$axios.setToken(data.token, "Bearer");
 
           this.$router.push("/");
         })
