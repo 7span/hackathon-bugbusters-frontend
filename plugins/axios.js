@@ -1,7 +1,7 @@
 export default function ({ $axios, redirect }) {
-  $axios.onResponse((response) => {
-    return response.data;
-  });
+  // $axios.onResponse((response) => {
+  //   return response.data;
+  // });
 
   $axios.onError((error) => {
     console.log("error", error);
@@ -9,7 +9,6 @@ export default function ({ $axios, redirect }) {
 
     if (code === 401) {
       if (process.client) {
-        debugger;
         const token = localStorage.getItem("token");
 
         if (token) localStorage.removeItem("token");

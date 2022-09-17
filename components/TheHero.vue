@@ -173,7 +173,6 @@ export default {
           .then((response) => {
             this.isGenerated = true;
             this.isLoader = false;
-            console.log('Response==>',response);
             this.shortLink = response.data.data.short_url;
             // this.$toast.success(
             //   "Login Successful. Welcome to TinyMiny Url Shortener."

@@ -74,8 +74,8 @@ export default {
   },
   data() {
     return {
-      email: "jpb@gmail.com",
-      password: "12345678",
+      email: "",
+      password: "",
       ipAddress: "",
       isLoading: false,
     };
@@ -118,7 +118,6 @@ export default {
         .finally(() => (this.isLoading = false));
     },
     afterLogin(data) {
-      debugger;
       this.$toast.success(
         "Login Successful. Welcome to TinyMiny Url Shortener."
       );
