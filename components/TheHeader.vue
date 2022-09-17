@@ -51,7 +51,7 @@ export default {
           isOutline: true,
         },
         {
-          name: "Signup",
+          name: "Sign Up",
           to: "/signup",
           isFill: true,
         },

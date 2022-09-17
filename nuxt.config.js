@@ -1,9 +1,10 @@
 let baseUrl = "http://192.168.0.170:8888/api/v1";
 
+const appName = "TinyMiny | URL Shortner";
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
-    title: "Tiny Miny | URL Shortner",
+    title: appName,
     htmlAttrs: {
       lang: "en",
     },
@@ -61,5 +62,6 @@ export default {
   },
   env: {
     baseUrl: baseUrl,
+    NUXT_ENV_APPNAME: appName,
   },
 };

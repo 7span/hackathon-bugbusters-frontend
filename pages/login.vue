@@ -15,15 +15,7 @@
             type="text"
             v-model="email"
             placeholder="Enter Username"
-            class="
-              block
-              p-3
-              border
-              rounded
-              border-gray-300
-              w-full
-              focus:outline-none
-            "
+            class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
           />
         </div>
         <div class="mt-4">
@@ -32,60 +24,29 @@
             type="password"
             v-model="password"
             placeholder="Enter Password"
-            class="
-              block
-              p-3
-              border
-              rounded
-              border-gray-300
-              w-full
-              focus:outline-none
-            "
+            class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
           />
         </div>
         <div class="mt-5">
           <button
-            class="
-              block
-              text-center
-              bg-primary-500
-              hover:bg-dark-500
-              w-full
-              p-3
-              text-white
-              rounded
-              transition-all
-              duration-75
-            "
+            class="block text-center bg-primary-500 hover:bg-dark-500 w-full p-3 text-white rounded transition-all duration-75"
             @click="login"
-            :disabled="!email && !password"
-            :class="!email && !password ? 'cursor-not-allowed' : ''"
+            :disabled="!email || !password"
+            :class="!email || !password ? 'cursor-not-allowed' : ''"
           >
             Sign in
           </button>
         </div>
         <div class="mt-5 flex justify-between">
           <nuxt-link
-            to="/register"
-            class="
-              text-gray-500
-              hover:text-primary-500
-              flex
-              items-center
-              text-sm
-            "
+            to="/signup"
+            class="text-gray-500 hover:text-primary-500 flex items-center text-sm"
           >
             <icones-add-account class="mr-1 text-xl" /> Create New User
           </nuxt-link>
           <nuxt-link
             to="#"
-            class="
-              text-primary-500
-              hover:text-primary-500
-              flex
-              items-center
-              text-sm
-            "
+            class="text-primary-500 hover:text-primary-500 flex items-center text-sm"
           >
             <icones-reset class="mr-1 text-xl" /> Forgot Password
           </nuxt-link>
@@ -96,38 +57,47 @@
 </template>
 
 <script>
-import { showApiError } from "@/utilities/common";
+import { showApiError, getIpAddress } from "@/utilities/common";
 
 export default {
-  layout:'auth',
-  data(){
-    return{
-      email:'',
-      password:'',
-      ip_address:'102.33.22.101'
-    }
+  layout: "auth",
+  head: {
+    title: `Login | ${process.env.NUXT_ENV_APPNAME}`,
+  },
+  data() {
+    return {
+      email: "",
+      password: "",
+      ipAddress: "",
+    };
+  },
+  async created() {
+    this.ipAddress = await this.getIpAddress();
   },
   methods: {
-    login(){
-      if(this.email !== '' || this.password !== ''){
+    getIpAddress,
+
+    login() {
+      if (this.email !== "" || this.password !== "") {
         this.$axios
           .post("login", {
-            password:this.password,
+            password: this.password,
             email: this.email,
-            ip_address: this.ip_address,
+            ip_address: this.ipAddress,
           })
           .then((res) => {
             this.$toast.success(
               "Login Successful. Welcome to TinyMiny Url Shortener."
             );
+
+            this.$router.push("/");
           })
           .catch(({ response }) => {
             console.log("error ", response);
             showApiError(this, response.data);
           });
       }
-    }
+    },
   },
 };
 </script>
-
