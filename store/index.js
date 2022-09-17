@@ -1,16 +1,20 @@
 export const state = () => ({
-  isAuth: false,
+  user: {},
 });
 
 export const mutations = {
-  setIsAuth(state, data) {
-    console.log("CHECK ROUTE==>", state);
-    state.isAuth = data;
+  setUser(state, data) {
+    state.user = data;
+  },
+  resetStore(state) {
+    state = {
+      user: {},
+    };
   },
 };
 
 export const getters = {
-  checkAuth(state) {
-    return state.isAuth;
+  getUser(state) {
+    return state.user;
   },
 };

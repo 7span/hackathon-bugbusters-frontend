@@ -4,18 +4,7 @@
       <div class="max-w-3xl mx-auto relative">
         <div class="relative overflow-hidden pt-9">
           <h1
-            class="
-              text-white text-7xl
-              font-extrabold
-              text-center
-              flex
-              items-center
-              justify-center
-              relative
-              z-10
-              mt-2
-              shadow-black
-            "
+            class="text-white text-7xl font-extrabold text-center flex items-center justify-center relative z-10 mt-2 shadow-black"
           >
             make your
             <b class="text-2xl mx-4 mt-2 text-dark-500">&lt;URL&gt;</b> tiny
@@ -28,13 +17,7 @@
               type="text"
               v-model="main_url"
               placeholder="Enter your URL here..."
-              class="
-                w-full
-                focus:outline-none
-                pt-3
-                pb-4
-                border-b border-gray-300
-              "
+              class="w-full focus:outline-none pt-3 pb-4 border-b border-gray-300"
             />
             <div class="mt-5">
               <label for="" class="text-dark-500 text-base font-bold mb-2 block"
@@ -57,18 +40,7 @@
                 </div>
 
                 <button
-                  class="
-                    py-2
-                    px-4
-                    bg-dark-500
-                    hover:bg-dark-800
-                    text-white
-                    rounded
-                    ml-auto
-                    font-bold
-                    flex
-                    items-center
-                  "
+                  class="py-2 px-4 bg-dark-500 hover:bg-dark-800 text-white rounded ml-auto font-bold flex items-center"
                   @click="generate"
                 >
                   <IconesLoader
@@ -100,44 +72,44 @@
 </template>
 <script>
 export default {
-  data(){
-    return{
-      main_url:'',
-      user_id:'',
-      format:[],
-      combinations:[
+  data() {
+    return {
+      main_url: "",
+      user_id: "",
+      format: [],
+      combinations: [
         {
-          label:'A-Z',
-          value:'capital'
+          label: "A-Z",
+          value: "capital",
         },
         {
-          label:'a-z',
-          value:'small'
+          label: "a-z",
+          value: "small",
         },
         {
-          label:'0-9',
-          value:'digits'
-        }
+          label: "0-9",
+          value: "digits",
+        },
       ],
-      isGenerated:false,
-      isLoader:false,
-      shortLink:''
-    }
+      isGenerated: false,
+      isLoader: false,
+      shortLink: "",
+    };
   },
-  methods:{
-    generate(){
+  methods: {
+    generate() {
       this.isLoader = true;
-      if(this.main_url !== ''){
+      if (this.main_url !== "") {
         this.$axios
           .post("generate-short-url", {
-            main_url:this.main_url,
+            main_url: this.main_url,
             user_id: this.user_id,
             format: this.format,
           })
-          .then((res) => {
+          .then((response) => {
             this.isGenerated = true;
             this.isLoader = false;
-            this.shortLink = res.data.data.short_url;
+            this.shortLink = response.data.short_url;
             // this.$toast.success(
             //   "Login Successful. Welcome to TinyMiny Url Shortener."
             // );
@@ -149,12 +121,10 @@ export default {
           });
       }
     },
-    copyLink(){
+    copyLink() {
       navigator.clipboard.writeText(this.shortLink);
-      this.$toast.success(
-              "Link Copied"
-            );
-    }
-  }
-}
+      this.$toast.success("Link Copied");
+    },
+  },
+};
 </script>

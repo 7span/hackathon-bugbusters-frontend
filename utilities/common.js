@@ -39,3 +39,10 @@ export const getIpAddress = () => {
     })
   );
 };
+
+export const getToken = () => {
+  if (process.client) {
+    const token = localStorage.getItem("token");
+    return token;
+  }
+};
