@@ -1,21 +1,15 @@
 // tailwind.config.js
 module.exports = {
   mode: "jit",
-  purge: ["./assets/**/*.{css}"],
+  purge: [
+    "./assets/**/*.{css}",
+    "./components/*.{vue,js}",
+    "./components/**/*.{vue,js}",
+    "./pages/*.vue",
+    "./layouts/*.vue",
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
-    // fontSize: {
-    //   "6xl": ["3.75rem", "1.1"],
-    //   "5xl": ["3rem", "1.18"],
-    //   "4xl": ["2.25rem", "2.75rem"],
-    //   "3xl": ["1.875rem", "2.5rem"],
-    //   "2xl": ["1.5rem", "1.75rem"],
-    //   xl: ["1.25rem", "1.5rem"],
-    //   lg: ["1.125rem", "1.5rem"],
-    //   base: ["1rem", "1.5rem"],
-    //   sm: ["0.875rem", "1.5rem"],
-    //   xs: ["0.75rem", "1.25rem"],
-    // },
     screens: {
       xs: "576px",
       sm: "768px",
@@ -37,7 +31,8 @@ module.exports = {
       },
     },
     fontFamily: {
-      body: "Manrope",
+      body: "Nunito Sans",
+      display: "Josefin Sans",
     },
     extend: {
       colors: {
