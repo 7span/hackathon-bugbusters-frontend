@@ -1,52 +1,55 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito+Sans:wght@300;400;700;800&display=swap');
-body{
-  @apply bg-gray-200
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito+Sans:wght@300;400;700;800&display=swap");
+body {
+  @apply bg-white;
 }
-.nav-link{
-  & + .nav-link{
-    @apply ml-3
+.nav-link {
+  & + .nav-link {
+    @apply ml-3;
   }
 }
-input{
-  &:focus{
-    &::placeholder{
-      @apply text-white
+.hero--image {
+  left: 40%;
+}
+input {
+  &:focus {
+    &::placeholder {
+      @apply text-white;
     }
   }
 }
 
-.text-highlight{
+.text-highlight {
   animation-name: blinker;
   animation-duration: 2s;
   // animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 
-.custom-checkbox{
+.custom-checkbox {
   @apply relative;
-  input[type="checkbox"]{
+  input[type="checkbox"] {
     @apply opacity-0 absolute top-0 left-0;
-    &:checked + label{
-      &::before{
-        background-image: url('/images/check-mark.png');
+    &:checked + label {
+      &::before {
+        background-image: url("/images/check-mark.png");
         background-size: 19px;
         background-position: center;
         background-repeat: no-repeat;
         border-color: transparent;
-        @apply bg-primary-500
+        @apply bg-primary-500;
       }
     }
   }
-  label{
+  label {
     @apply relative pl-7 flex items-center cursor-pointer text-gray-400 transition-all duration-100;
-    &::before{
-      content:"";
-      @apply w-5 h-5 rounded border-2 border-gray-300 block absolute left-0 ;
+    &::before {
+      content: "";
+      @apply w-5 h-5 rounded border-2 border-gray-300 block absolute left-0;
     }
-    &:hover{
+    &:hover {
       @apply text-primary-500;
-      &::before{
-        @apply border-primary-500
+      &::before {
+        @apply border-primary-500;
       }
     }
   }
