@@ -1,5 +1,5 @@
 <template>
-  <div class="bg-primary-500 h-screen flex items-center">
+  <div class="bg-primary-500 flex items-center pt-32 pb-16">
     <div class="container">
       <div class="max-w-3xl mx-auto relative">
         <div class="relative overflow-hidden pt-9">
@@ -76,7 +76,8 @@
                     class="mr-2 text-2xl"
                     :class="isLoader ? 'animate-spin' : ''"
                   />
-                  Make It Tinny
+                  <span v-if="shortLink">Regenerate</span>
+                  <span v-else>Make It Tinny</span>
                 </button>
               </div>
             </div>
@@ -84,14 +85,45 @@
         </div>
         <div
           v-if="isGenerated"
-          class="p-6 rounded-2xl bg-white mt-4 flex justify-between"
+          class="
+            p-6
+            rounded-2xl
+            bg-white
+            mt-4
+            flex
+            items-center
+            justify-between
+          "
         >
-          <p>{{ shortLink }}</p>
+          <div class="flex items-center">
+            <div class="relative rounded-xl overflow-hidden">
+              <qrcode-vue
+                v-if="shortLink"
+                :value="shortLink"
+                render-as="svg"
+                size="60"
+                class="rounded-xl shadow-2xl borde"
+              >
+              </qrcode-vue>
+              <!-- <div class="absolute inset-0 flex items-center justify-center">
+                <img
+                  src="/images/tiny-miny-logo.svg"
+                  class="w-10 p-1 bg-white rounded-xl"
+                />
+              </div> -->
+            </div>
+            <a
+              :href="shortLink"
+              target="_blank"
+              class="text-lg text-gray-500 ml-5 hover:text-primary-500"
+              >{{ shortLink }}</a
+            >
+          </div>
           <p
             @click="copyLink"
             class="cursor-pointer text-gray-500 hover:text-gray-900"
           >
-            copy
+            <icones-copy />
           </p>
         </div>
       </div>
@@ -99,6 +131,7 @@
   </div>
 </template>
 <script>
+import QrcodeVue from 'qrcode.vue'
 export default {
   data(){
     return{
@@ -123,6 +156,9 @@ export default {
       isLoader:false,
       shortLink:''
     }
+  },
+  components: {
+    QrcodeVue,
   },
   methods:{
     generate(){
