@@ -1,0 +1,160 @@
+<template>
+  <div class="bg-primary-500 h-screen flex items-center">
+    <div class="container">
+      <div class="max-w-3xl mx-auto relative">
+        <div class="relative overflow-hidden pt-9">
+          <h1
+            class="
+              text-white text-7xl
+              font-extrabold
+              text-center
+              flex
+              items-center
+              justify-center
+              relative
+              z-10
+              mt-2
+              shadow-black
+            "
+          >
+            Make your
+            <b class="text-2xl mx-4 mt-2 text-dark-500">&lt;URL&gt;</b> tiny
+          </h1>
+          <div class="w-96 absolute top-6 inset-x-0 mx-auto">
+            <img src="/images/hand.png" class="-ml-11" alt="" />
+          </div>
+          <div class="p-6 rounded-2xl bg-white mt-40 relative z-10">
+            <input
+              type="text"
+              v-model="main_url"
+              placeholder="Enter your URL here..."
+              class="
+                w-full
+                focus:outline-none
+                pt-3
+                pb-4
+                border-b border-gray-300
+              "
+            />
+            <div class="mt-5">
+              <label for="" class="text-dark-500 text-base font-bold mb-2 block"
+                >Combination</label
+              >
+              <div class="flex items-center -mt-3">
+                <div
+                  v-for="(item, index) in combinations"
+                  :key="index"
+                  class="custom-checkbox"
+                  :class="index !== 0 ? 'ml-5' : ''"
+                >
+                  <input
+                    type="checkbox"
+                    :id="'combinations-' + index"
+                    v-model="format"
+                    :value="item.value"
+                  />
+                  <label :for="'combinations-' + index">{{ item.label }}</label>
+                </div>
+
+                <button
+                  class="
+                    py-2
+                    px-4
+                    bg-dark-500
+                    hover:bg-dark-800
+                    text-white
+                    rounded
+                    ml-auto
+                    font-bold
+                    flex
+                    items-center
+                  "
+                  @click="generate"
+                >
+                  <IconesLoader
+                    v-if="isLoader"
+                    class="mr-2 text-2xl"
+                    :class="isLoader ? 'animate-spin' : ''"
+                  />
+                  Make It Tinny
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          v-if="isGenerated"
+          class="p-6 rounded-2xl bg-white mt-4 flex justify-between"
+        >
+          <p>{{ shortLink }}</p>
+          <p
+            @click="copyLink"
+            class="cursor-pointer text-gray-500 hover:text-gray-900"
+          >
+            copy
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+export default {
+  data(){
+    return{
+      main_url:'',
+      user_id:'',
+      format:[],
+      combinations:[
+        {
+          label:'A-Z',
+          value:'capital'
+        },
+        {
+          label:'a-z',
+          value:'small'
+        },
+        {
+          label:'0-9',
+          value:'digits'
+        }
+      ],
+      isGenerated:false,
+      isLoader:false,
+      shortLink:''
+    }
+  },
+  methods:{
+    generate(){
+      this.isLoader = true;
+      if(this.main_url !== ''){
+        this.$axios
+          .post("generate-short-url", {
+            main_url:this.main_url,
+            user_id: this.user_id,
+            format: this.format,
+          })
+          .then((res) => {
+            this.isGenerated = true;
+            this.isLoader = false;
+            this.shortLink = res.data.data.short_url;
+            // this.$toast.success(
+            //   "Login Successful. Welcome to TinyMiny Url Shortener."
+            // );
+          })
+          .catch(({ response }) => {
+            console.log("error ", response);
+            this.isLoader = false;
+            showApiError(this, response.data);
+          });
+      }
+    },
+    copyLink(){
+      navigator.clipboard.writeText(this.shortLink);
+      this.$toast.success(
+              "Link Copied"
+            );
+    }
+  }
+}
+</script>

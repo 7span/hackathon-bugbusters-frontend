@@ -31,3 +31,11 @@ export const showApiError = (instance, error) => {
     instance.$toast.error(errors[errorKeys[0]][0]);
   }
 };
+
+export const getIpAddress = () => {
+  return fetch("https://ipapi.co/json").then((res) =>
+    res.json().then((res) => {
+      return res.ip;
+    })
+  );
+};

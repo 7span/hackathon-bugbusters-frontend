@@ -14,3 +14,40 @@ input{
     }
   }
 }
+
+.text-highlight{
+  animation-name: blinker;
+  animation-duration: 2s;
+  // animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.custom-checkbox{
+  @apply relative;
+  input[type="checkbox"]{
+    @apply opacity-0 absolute top-0 left-0;
+    &:checked + label{
+      &::before{
+        background-image: url('/images/check-mark.png');
+        background-size: 19px;
+        background-position: center;
+        background-repeat: no-repeat;
+        border-color: transparent;
+        @apply bg-primary-500
+      }
+    }
+  }
+  label{
+    @apply relative pl-7 flex items-center cursor-pointer text-gray-400 transition-all duration-100;
+    &::before{
+      content:"";
+      @apply w-5 h-5 rounded border-2 border-gray-300 block absolute left-0 ;
+    }
+    &:hover{
+      @apply text-primary-500;
+      &::before{
+        @apply border-primary-500
+      }
+    }
+  }
+}

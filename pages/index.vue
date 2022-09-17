@@ -1,10 +1,10 @@
 <template>
   <div>
-    <h1>Hello World</h1>
+    <TheHero />
   </div>
 </template>
 <script>
 export default {
-  layout:"default",
+  layout: "default",
 };
 </script>
