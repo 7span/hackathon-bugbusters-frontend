@@ -14,11 +14,11 @@ export default {
   },
 
   created() {
-    // this.hydrate();
-    // const token = getToken();
-    // if (token) {
-    //   this.$axios.setToken(token, "Bearer");
-    // } else this.$router.push({ name: "login" });
+    this.hydrate();
+    const token = getToken();
+    if (token) {
+      this.$axios.setToken(token, "Bearer");
+    }
   },
   methods: {
     getToken,

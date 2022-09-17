@@ -67,10 +67,14 @@
           </p>
         </div>
       </div>
+      <UrlList />
     </div>
   </div>
 </template>
 <script>
+import { mapGetters } from "vuex";
+import UrlList from "./UrlList.vue";
+
 export default {
   data() {
     return {
@@ -96,20 +100,31 @@ export default {
       shortLink: "",
     };
   },
+  components: {
+    UrlList,
+  },
+  computed: {
+    ...mapGetters(["getUser"]),
+  },
   methods: {
     generate() {
       this.isLoader = true;
       if (this.main_url !== "") {
+        if (this.getUser) {
+          this.user_id = this.getUser.id;
+        }
         this.$axios
           .post("generate-short-url", {
             main_url: this.main_url,
             user_id: this.user_id,
             format: this.format,
           })
+          .then((res) => res.data.data)
           .then((response) => {
+            console.log(response);
             this.isGenerated = true;
             this.isLoader = false;
-            this.shortLink = response.data.short_url;
+            this.shortLink = response.short_url;
             // this.$toast.success(
             //   "Login Successful. Welcome to TinyMiny Url Shortener."
             // );
