@@ -1,4 +1,4 @@
-let baseUrl = "http://192.168.0.170:8888/api/v1";
+let baseUrl = "https://bugbusters-api.preview.im/api/v1/";
 
 // let baseUrl = "https://bugbusters-api.preview.im/";
 
@@ -16,7 +16,13 @@ export default {
       { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
     ],
-    link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
+    link: [
+      { rel: "icon", type: "image/x-icon", href: "/favicon.ico" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito+Sans:wght@300;400;700;800&display=swap",
+      },
+    ],
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
