@@ -4,18 +4,7 @@
       <div class="max-w-3xl mx-auto relative">
         <div class="relative overflow-hidden pt-9">
           <h1
-            class="
-              text-white text-7xl
-              font-extrabold
-              text-center
-              flex
-              items-center
-              justify-center
-              relative
-              z-10
-              mt-2
-              shadow-black
-            "
+            class="text-white text-7xl font-extrabold text-center flex items-center justify-center relative z-10 mt-2 shadow-black"
           >
             Make your
             <b class="text-2xl mx-4 mt-2 text-dark-500">&lt;URL&gt;</b> tiny
@@ -24,76 +13,59 @@
             <img src="/images/hand.png" class="-ml-11" alt="" />
           </div>
           <div class="p-6 rounded-2xl bg-white mt-40 relative z-10">
-            <input
-              type="text"
-              v-model="main_url"
-              placeholder="Enter your URL here..."
-              class="
-                w-full
-                focus:outline-none
-                pt-3
-                pb-4
-                border-b border-gray-300
-              "
-            />
-            <div class="mt-5">
-              <label for="" class="text-dark-500 text-base font-bold mb-2 block"
-                >Combination</label
-              >
-              <div class="flex items-center -mt-3">
-                <div
-                  v-for="(item, index) in combinations"
-                  :key="index"
-                  class="custom-checkbox"
-                  :class="index !== 0 ? 'ml-5' : ''"
+            <form @submit.prevent="generate">
+              <input
+                pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,63}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)"
+                type="text"
+                v-model="main_url"
+                placeholder="Enter your URL here..."
+                class="w-full focus:outline-none pt-3 pb-4 border-b border-gray-300"
+              />
+              <div class="mt-5">
+                <label
+                  for=""
+                  class="text-dark-500 text-base font-bold mb-2 block"
+                  >Combination</label
                 >
-                  <input
-                    type="checkbox"
-                    :id="'combinations-' + index"
-                    v-model="format"
-                    :value="item.value"
-                  />
-                  <label :for="'combinations-' + index">{{ item.label }}</label>
-                </div>
+                <div class="flex items-center -mt-3">
+                  <div
+                    v-for="(item, index) in combinations"
+                    :key="index"
+                    class="custom-checkbox"
+                    :class="index !== 0 ? 'ml-5' : ''"
+                  >
+                    <input
+                      type="checkbox"
+                      :id="'combinations-' + index"
+                      v-model="format"
+                      :value="item.value"
+                    />
+                    <label :for="'combinations-' + index">{{
+                      item.label
+                    }}</label>
+                  </div>
 
-                <button
-                  class="
-                    py-2
-                    px-4
-                    bg-dark-500
-                    hover:bg-dark-800
-                    text-white
-                    rounded
-                    ml-auto
-                    font-bold
-                    flex
-                    items-center
-                  "
-                  @click="generate"
-                >
-                  <IconesLoader
-                    v-if="isLoader"
-                    class="mr-2 text-2xl"
-                    :class="isLoader ? 'animate-spin' : ''"
-                  />
-                  <span v-if="shortLink">Regenerate</span>
-                  <span v-else>Make It Tinny</span>
-                </button>
+                  <button
+                    class="py-2 px-4 bg-dark-500 hover:bg-dark-800 text-white rounded ml-auto font-bold flex items-center"
+                    type="submit"
+                  >
+                    <!-- @click="generate" -->
+                    <IconesLoader
+                      v-if="isLoader"
+                      class="mr-2 text-2xl"
+                      :class="isLoader ? 'animate-spin' : ''"
+                    />
+                    <span v-if="shortLink">Regenerate</span>
+                    <span v-else>Make It Tinny</span>
+                  </button>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
         </div>
         <div
           v-if="isGenerated"
-          class="
-            p-6
-            rounded-2xl
-            bg-white
-            mt-4
-            flex
-            items-center
-            justify-between
-          "
+          class="p-6 rounded-2xl bg-white mt-4 flex items-center justify-between"
         >
           <div class="flex items-center">
             <div class="relative rounded-xl overflow-hidden">
@@ -131,7 +103,7 @@
   </div>
 </template>
 <script>
-import QrcodeVue from 'qrcode.vue'
+import QrcodeVue from "qrcode.vue";
 export default {
   data() {
     return {
@@ -160,8 +132,8 @@ export default {
   components: {
     QrcodeVue,
   },
-  methods:{
-    generate(){
+  methods: {
+    generate() {
       this.isLoader = true;
       if (this.main_url !== "") {
         this.$axios
@@ -187,10 +159,8 @@ export default {
     },
     copyLink() {
       navigator.clipboard.writeText(this.shortLink);
-      this.$toast.success(
-              "Link Copied"
-            );
-    }
-  }
-}
+      this.$toast.success("Link Copied");
+    },
+  },
+};
 </script>
