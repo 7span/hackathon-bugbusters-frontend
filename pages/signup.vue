@@ -139,7 +139,7 @@ export default {
           ip_address: this.ipAddress,
         })
         .then((response) => {
-          this.afterSignup(response.data);
+          this.afterSignup();
         })
         .catch(({ response }) => {
           console.log("error ", response.data);
@@ -149,16 +149,12 @@ export default {
           this.isLoading = false;
         });
     },
-    afterSignup(data) {
-      this.$toast.success("Sign Up Successful. You can now use TinyMiny.");
+    afterSignup() {
+      this.$toast.success(
+        "Sign Up Successful. Verification has been sent to registered email address."
+      );
 
-      this.setUser(data.user);
-
-      localStorage.setItem("token", data.token);
-
-      this.$axios.setToken(data.token, "Bearer");
-
-      this.$router.push("/");
+      this.$router.push({ name: "login" });
     },
   },
 };
