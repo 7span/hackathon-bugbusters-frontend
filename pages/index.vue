@@ -2,6 +2,7 @@
   <div>
     <TheHero />
     <Features />
+    <Price />
   </div>
 </template>
 
