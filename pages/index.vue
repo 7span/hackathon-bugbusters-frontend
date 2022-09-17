@@ -26,7 +26,7 @@ export default {
     hydrate() {
       console.log("user", this.getUser);
       this.$axios.get("me").then((response) => {
-        this.setUser(response);
+        this.setUser(response.data);
       });
     },
   },
