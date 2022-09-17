@@ -9,35 +9,41 @@
     </div>
     <div class="flex-1 flex items-center justify-center">
       <div class="w-80 mx-auto">
-        <div>
-          <!-- Email -->
-          <label for="" class="block text-dark-500">Email</label>
-          <input
-            type="text"
-            v-model="email"
-            placeholder="Enter Username"
-            class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
-          />
-        </div>
-        <div class="mt-4">
-          <!-- Password -->
-          <label for="" class="block text-dark-500">Password</label>
-          <input
-            type="password"
-            v-model="password"
-            placeholder="Enter Password"
-            class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
-          />
-        </div>
-        <div class="mt-5">
-          <ButtonPrimary
-            label="Sign in"
-            @click.native="login"
-            :disabled="isDisabled"
-            :loader="isLoading"
-            class="block text-center w-full p-3"
-          />
-        </div>
+        <form v-on:submit.prevent="login">
+          <div>
+            <!-- Email -->
+            <!-- TODO Make EmailInput Component -->
+            <label for="" class="block text-dark-500">Email</label>
+            <input
+              title="Invalid Email. Please enter appropriate email address."
+              pattern="\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+"
+              v-model="email"
+              placeholder="Enter Email"
+              class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
+            />
+          </div>
+          <div class="mt-4">
+            <!-- Password -->
+            <label for="" class="block text-dark-500">Password</label>
+            <input
+              title="Minimum 8 characters required."
+              minlength="8"
+              type="password"
+              v-model="password"
+              placeholder="Enter Password"
+              class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
+            />
+          </div>
+          <div class="mt-5">
+            <ButtonPrimary
+              type="submit"
+              label="Sign in"
+              :disabled="isDisabled"
+              :loader="isLoading"
+              class="block text-center w-full p-3"
+            />
+          </div>
+        </form>
         <div class="mt-5 flex justify-between">
           <nuxt-link
             to="/signup"
@@ -93,10 +99,12 @@ export default {
           email: this.email,
           ip_address: this.ipAddress,
         })
-        .then((res) => {
+        .then(({ data }) => {
           this.$toast.success(
             "Login Successful. Welcome to TinyMiny Url Shortener."
           );
+
+          localStorage.setItem("token", data.token);
 
           this.$router.push("/");
         })
