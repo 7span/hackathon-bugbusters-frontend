@@ -2,6 +2,9 @@
 body {
   @apply bg-white;
 }
+html{
+  scroll-behavior: smooth;
+}
 .nav-link {
   & + .nav-link {
     @apply ml-3;

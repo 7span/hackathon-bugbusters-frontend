@@ -65,6 +65,7 @@
 
 <script>
 import { showApiError, getIpAddress } from "@/utilities/common";
+import { mapMutations } from "vuex";
 
 export default {
   layout: "auth",
@@ -73,13 +74,14 @@ export default {
   },
   data() {
     return {
-      email: "",
-      password: "",
+      email: "jpb@gmail.com",
+      password: "12345678",
       ipAddress: "",
       isLoading: false,
     };
   },
   async created() {
+    this.checkToken();
     this.ipAddress = await this.getIpAddress();
   },
   computed: {
@@ -90,6 +92,13 @@ export default {
   },
   methods: {
     getIpAddress,
+    checkToken() {
+      if (process.client) {
+        const token = localStorage.getItem("token");
+        if (token) this.$router.push("/");
+      }
+    },
+    ...mapMutations(["setUser"]),
 
     login() {
       this.isLoading = true;
@@ -99,23 +108,28 @@ export default {
           email: this.email,
           ip_address: this.ipAddress,
         })
-        .then((res) => {
-          const data = res.data;
-          this.$toast.success(
-            "Login Successful. Welcome to TinyMiny Url Shortener."
-          );
-
-          localStorage.setItem("token", data.token);
-
-          this.$axios.setToken(data.token, "Bearer");
-
-          this.$router.push("/");
+        .then((response) => {
+          this.afterLogin(response.data);
         })
         .catch(({ response }) => {
           console.log("error ", response);
           showApiError(this, response.data);
         })
         .finally(() => (this.isLoading = false));
+    },
+    afterLogin(data) {
+      debugger;
+      this.$toast.success(
+        "Login Successful. Welcome to TinyMiny Url Shortener."
+      );
+
+      this.setUser(data.user);
+
+      localStorage.setItem("token", data.token);
+
+      this.$axios.setToken(data.token, "Bearer");
+
+      this.$router.push("/");
     },
   },
 };

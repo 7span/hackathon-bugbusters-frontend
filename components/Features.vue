@@ -1,49 +1,63 @@
 <template>
-  <section class="py-24 lg:py-36">
+  <section id="features" class="py-24 bg-primary-500">
     <div class="container">
-      <div class="text-center my-16">
-        <h2 class="text-4xl mb-6 font-semibold lg:text-7xl text-primary-500">
-          <span class="text-5xl italic font-medium text-black">what is</span>
-          tiny miny?
+      <div class="text-center">
+        <h2 class="text-4xl mb-8 font-semibold lg:text-6xl text-white">
+          <span class="text-3xl italic font-medium text-dark-500 font-extrabold"
+            >Our</span
+          >
+          <span>features</span>
         </h2>
-        <p class="text-xl max-w-lg mr-auto ml-auto">
+        <!-- <p class="text-xl max-w-2xl mr-auto ml-auto text-gray-500">
           A tiny miny is a tool that transforms your long links into tiny ones.
           Our tool can drastically shorten your long links and still reliably
           direct to the same web pages.
-        </p>
+        </p> -->
       </div>
-      <div class="flex justify-between flex-wrap">
-        <div class="w-full sm:w-1/3 text-center">
-          <div class="p-6">
-            <img
-              class="mr-auto ml-auto w-auto h-20"
-              src="/images/feature-1.svg"
-              alt=""
-            />
+      <div class="flex justify-between flex-wrap mt-16 max-w-4xl mx-auto">
+        <div
+          v-for="(feature, index) in features"
+          :key="index"
+          class="flex-1"
+          :class="index !== 0 ? 'border-l border-dashed border-gray-200' : ''"
+        >
+          <div class="flex-1">
+            <div class="p-6">
+              <img
+                class="mr-auto ml-auto w-auto h-12 grayscale"
+                :src="`/images/` + feature.icon"
+                alt=""
+                style="filter: brightness(0) invert(1)"
+              />
+            </div>
+            <p class="text-xl font-semibold text-white text-center">
+              {{ feature.title }}
+            </p>
           </div>
-          <p class="text-xl font-semibold">Easy Link Shortening</p>
-        </div>
-        <div class="text-center border-x-2 w-full sm:w-1/3">
-          <div class="p-6">
-            <img
-              class="mr-auto ml-auto w-auto h-20"
-              src="/images/feature-2.svg"
-              alt=""
-            />
-          </div>
-          <p class="text-xl font-semibold">Full Link History</p>
-        </div>
-        <div class="w-full sm:w-1/3 text-center">
-          <div class="p-6">
-            <img
-              class="mr-auto ml-auto w-auto h-20"
-              src="/images/feature-3.svg"
-              alt=""
-            />
-          </div>
-          <p class="text-xl font-semibold">Customized tiny URLs</p>
         </div>
       </div>
     </div>
   </section>
 </template>
+<script>
+export default{
+  data(){
+    return{
+      features:[
+        {
+          icon:'feature-1.svg',
+          title:'Easy Link Shortening'
+        },
+        {
+          icon:'feature-2.svg',
+          title:'Full Link History'
+        },
+        {
+          icon:'feature-3.svg',
+          title:'Customized tiny URLs'
+        }
+      ]
+    }
+  }
+}
+</script>

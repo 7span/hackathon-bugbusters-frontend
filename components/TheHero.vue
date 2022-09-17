@@ -133,29 +133,29 @@
 <script>
 import QrcodeVue from 'qrcode.vue'
 export default {
-  data(){
-    return{
-      main_url:'',
-      user_id:'',
-      format:[],
-      combinations:[
+  data() {
+    return {
+      main_url: "",
+      user_id: "",
+      format: [],
+      combinations: [
         {
-          label:'A-Z',
-          value:'capital'
+          label: "A-Z",
+          value: "capital",
         },
         {
-          label:'a-z',
-          value:'small'
+          label: "a-z",
+          value: "small",
         },
         {
-          label:'0-9',
-          value:'digits'
-        }
+          label: "0-9",
+          value: "digits",
+        },
       ],
-      isGenerated:false,
-      isLoader:false,
-      shortLink:''
-    }
+      isGenerated: false,
+      isLoader: false,
+      shortLink: "",
+    };
   },
   components: {
     QrcodeVue,
@@ -163,17 +163,18 @@ export default {
   methods:{
     generate(){
       this.isLoader = true;
-      if(this.main_url !== ''){
+      if (this.main_url !== "") {
         this.$axios
           .post("generate-short-url", {
-            main_url:this.main_url,
+            main_url: this.main_url,
             user_id: this.user_id,
             format: this.format,
           })
-          .then((res) => {
+          .then((response) => {
             this.isGenerated = true;
             this.isLoader = false;
-            this.shortLink = res.data.data.short_url;
+            console.log('Response==>',response);
+            this.shortLink = response.data.data.short_url;
             // this.$toast.success(
             //   "Login Successful. Welcome to TinyMiny Url Shortener."
             // );
@@ -185,7 +186,7 @@ export default {
           });
       }
     },
-    copyLink(){
+    copyLink() {
       navigator.clipboard.writeText(this.shortLink);
       this.$toast.success(
               "Link Copied"

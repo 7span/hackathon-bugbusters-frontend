@@ -11,15 +11,15 @@
             v-for="(nav, index) in navs"
             :key="index"
             :to="nav.to"
-            class="nav-link text-white hover:text-dark-500 text-base"
-          >
-            <!-- :class="
+            class="nav-link hover:text-dark-500 text-base"
+            :class="
               nav.isOutline
-                ? 'rounded border border-primary-500 text-primary-500 py-2 hover:bg-primary-500 hover:text-white px-4'
+                ? 'rounded border border-white text-white py-2 hover:bg-white hover:text-primary-500 px-4'
                 : nav.isFill
-                ? 'rounded border border-primary-500 bg-primary-500 py-2 hover:bg-primary-600 text-white hover:text-white px-4'
-                : 'px-2'
-            " -->
+                ? 'rounded border border-white bg-white py-2 hover:bg-gray-200 text-primary-500 hover:text-primary-500 px-4'
+                : 'text-white px-2'
+            "
+          >
             {{ nav.name }}
           </nuxt-link>
         </nav>
@@ -33,8 +33,21 @@ export default {
     return {
       navs: [
         {
-          name: "Login",
-          to: "login",
+          name:"About",
+          to:"#about"
+        },
+        {
+          name:"Features",
+          to:"#features"
+        },
+        {
+          name:"Pricing",
+          to:"#pricing"
+        },
+        {
+          name: "Sign In",
+          to: "/signin",
+          isOutline: true,
         },
         {
           name: "Sign Up",

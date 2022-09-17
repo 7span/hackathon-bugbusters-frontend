@@ -1,15 +1,16 @@
 <template>
-  <section class="py-22 lg:py-36 overflow-hidden">
+  <section class="py-14 overflow-hidden">
     <div class="container">
       <!-- section-title -->
-      <div class="text-center mt-4 mb-20 lg:mb-40">
-        <h2 class="text-4xl font-semibold lg:text-7xl">paln <span class="text-2xl lg:text-4xl">&</span> pricing
+      <div class="text-center mt-4 mb-20">
+        <h2 class="text-4xl text-dark-500 font-semibold lg:text-7xl">
+          plan <span class="text-2xl lg:text-4xl font-thin">&</span> pricing
         </h2>
       </div>
       <!-- section-content -->
-      <div class="flex justify-between overflow-auto">
+      <div class="flex justify-between overflow-auto max-w-4xl mx-auto">
         <!-- section-blog -->
-        <div class="w-1/3 pb-4 min-w-[300px]">
+        <div class="flex-1">
           <div class="pb-6 border-b border-dark-300">
             <h2 class="text-3xl h-14 font-semibold mb-4">tiny</h2>
             <p class="text-4xl text-primary-500 font-semibold">$0</p>
@@ -17,7 +18,7 @@
           <ThePriceList :items="$options.tinyPlan" />
         </div>
         <!-- section-blog -->
-        <div class="w-1/3 pb-4 min-w-[300px]">
+        <div class="flex-1">
           <div class="pb-6 border-b border-dark-300">
             <h2 class="text-4xl h-14 font-semibold mb-4">small</h2>
             <p class="text-4xl text-primary-500 font-semibold">$50</p>
@@ -25,7 +26,7 @@
           <ThePriceList :items="$options.smallPlan" />
         </div>
         <!-- section-blog -->
-        <div class="w-1/3 pb-4 min-w-[300px]">
+        <div class="flex-1">
           <div class="pb-6 border-b border-dark-300">
             <h2 class="text-5xl h-14 font-semibold mb-4">large</h2>
             <p class="text-4xl text-primary-500 font-semibold">$150</p>
@@ -38,7 +39,7 @@
         label="Get Started"
         :disabled="isDisabled"
         :loader="isLoading"
-        class="block text-center font-semibold mr-auto ml-auto w-72 mt-20 p-3"
+        class="block text-center font-semibold mr-auto ml-auto w-72 mt-10 p-3"
       />
     </div>
   </section>
@@ -46,6 +47,7 @@
 
 <script>
 export default {
+  
   tinyPlan: [
     "Branded domains",
     "Links / redirects",
@@ -72,5 +74,11 @@ export default {
     "Team",
     "Team communiactor",
   ],
+  data(){
+    return{
+      isDisabled:false,
+      isLoading:false,
+    }
+  }
 };
 </script>

@@ -1,5 +1,7 @@
 let baseUrl = "https://bugbusters-api.preview.im/api/v1/";
 
+// let baseUrl = "https://bugbusters-api.preview.im/";
+
 const appName = "TinyMiny | URL Shortner";
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -59,7 +61,6 @@ export default {
       "Access-Control-Allow-Origin": "*",
       Accept: "application/json",
       "Content-Type": "application/json",
-      // Authorization: "Bearer 1672|uCsQLSK7DCTGVxyXenbPySACikhOjz7MTc1MTSDb",
     },
     crossdomain: true,
   },
