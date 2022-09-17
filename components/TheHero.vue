@@ -17,7 +17,7 @@
               shadow-black
             "
           >
-            make your
+            Make your
             <b class="text-2xl mx-4 mt-2 text-dark-500">&lt;URL&gt;</b> tiny
           </h1>
           <div class="w-96 absolute top-6 inset-x-0 mx-auto">
