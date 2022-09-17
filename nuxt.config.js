@@ -1,3 +1,5 @@
+let baseUrl = "http://192.168.0.170:8888/api/v1";
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -18,7 +20,7 @@ export default {
   css: ["@/assets/css/style.scss"],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [{ src: "~/plugins/index.js", mode: "client" }],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
@@ -44,7 +46,7 @@ export default {
   },
 
   axios: {
-    baseURL: "128.199.22.131", // Used as fallback if no runtime config is provided
+    baseURL: baseUrl,
     mode: "no-cors",
     headers: {
       "Access-Control-Allow-Origin": "*",
@@ -56,5 +58,8 @@ export default {
   },
   server: {
     port: 8000,
+  },
+  env: {
+    baseUrl: baseUrl,
   },
 };
