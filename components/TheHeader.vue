@@ -37,8 +37,9 @@ export default {
           to: "login",
         },
         {
-          name: "Register",
-          to: "register",
+          name: "Sign Up",
+          to: "/signup",
+          isFill: true,
         },
         // {
         //   name: "Login",
