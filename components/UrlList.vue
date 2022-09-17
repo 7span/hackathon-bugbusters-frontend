@@ -1,20 +1,28 @@
 <template>
-  <div class="max-w-3xl mr-auto ml-auto">
-    <table class="fl-table">
-      <thead>
-        <tr>
-          <th>Original Url</th>
-          <th>Short Url</th>
-          <th>Count</th>
-          <th>Status</th>
+  <div
+    class="max-w-3xl mt-6 mr-auto ml-auto bg-white rounded-2xl p-6 overflow-auto min-w-[300px]"
+  >
+    <table class="rounded-2xl">
+      <thead class="text-center">
+        <tr class="border-b border-gray-400 text-left">
+          <th class="text-dark-400 p-2 border-b border-dark-400">
+            Original Url
+          </th>
+          <th class="text-dark-400 p-2 border-b border-dark-400">Short Url</th>
+          <th class="text-dark-400 p-2 border-b border-dark-400">Count</th>
+          <th class="text-dark-400 p-2 border-b border-dark-400">Status</th>
         </tr>
       </thead>
       <tbody>
-        <tr v-for="(url, index) in urls" :key="index">
-          <td>{{ url.main_url }}</td>
-          <td>{{ url.short_url }}</td>
-          <td>{{ url.counts }}</td>
-          <td>{{ url.status }}</td>
+        <tr
+          class="border-b border-dark-200"
+          v-for="(url, index) in urls"
+          :key="index"
+        >
+          <td class="p-2 text-dark-400">{{ url.main_url }}</td>
+          <td class="p-2 text-dark-400">{{ url.short_url }}</td>
+          <td class="p-2 text-dark-400 text-center">{{ url.counts }}</td>
+          <td class="p-2 text-dark-400 text-center">{{ url.status }}</td>
         </tr>
       </tbody>
     </table>
