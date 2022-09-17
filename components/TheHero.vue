@@ -84,11 +84,17 @@
                 />
               </div> -->
             </div>
-            <a
+            <!-- <a
               :href="shortLink"
               target="_blank"
               class="text-lg text-gray-500 ml-5 hover:text-primary-500"
               >{{ shortLink }}</a
+            > -->
+
+            <nuxt-link
+              class="text-lg text-gray-500 ml-5 hover:text-primary-500"
+              :to="{ name: 'url', params: { url: shortLink.split('/').pop() } }"
+              >{{ shortLink }}</nuxt-link
             >
           </div>
           <p
