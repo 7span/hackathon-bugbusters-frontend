@@ -13,7 +13,7 @@ export default function ({ $axios, redirect }) {
 
         if (token) localStorage.removeItem("token");
       }
-      redirect("/login");
+      redirect("/signin");
     }
   });
 }

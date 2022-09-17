@@ -24,7 +24,7 @@ export default {
         })
         .then((response) => {
           this.$toast.success(response.data.message);
-          this.$router.push({ name: "login" });
+          this.$router.push({ name: "signin" });
         });
     },
   },

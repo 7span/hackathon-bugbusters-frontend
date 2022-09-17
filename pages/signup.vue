@@ -75,7 +75,7 @@
         </form>
         <div class="mt-5 flex justify-between">
           <nuxt-link
-            to="/login"
+            to="/signin"
             class="text-gray-500 hover:text-primary-500 flex items-center text-sm"
           >
             <icones-add-account class="mr-1" /> Already Have an Account
@@ -154,7 +154,7 @@ export default {
         "Sign Up Successful. Verification has been sent to registered email address."
       );
 
-      this.$router.push({ name: "login" });
+      this.$router.push({ name: "signin" });
     },
   },
 };
