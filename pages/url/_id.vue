@@ -5,6 +5,7 @@
 <script>
 export default {
   created() {
+    console.log("insisde created");
     if (process.client) this.redirectShortUrl();
   },
   methods: {

@@ -93,8 +93,10 @@
 
             <nuxt-link
               class="text-lg text-gray-500 ml-5 hover:text-primary-500"
-              :to="{ name: 'url', params: { url: shortLink.split('/').pop() } }"
-              target="_blank"
+              :to="{
+                name: 'url-id',
+                params: { id: shortLink.split('/').pop() },
+              }"
               >{{ shortLink }}</nuxt-link
             >
           </div>
