@@ -2,9 +2,8 @@
   <section class="py-22 lg:py-36 overflow-hidden">
     <div class="container">
       <!-- section-title -->
-      <div class="text-center mb-14">
-        <h2 class="text-4xl lg:text-8xl">
-          paln<span class="text-2xl lg:text-5xl">&</span>pricing
+      <div class="text-center mb-20 lg:mb-40">
+        <h2 class="text-4xl font-semibold lg:text-7xl">paln <span class="text-2xl lg:text-4xl">&</span> pricing
         </h2>
       </div>
       <!-- section-content -->
@@ -34,7 +33,13 @@
           <ThePriceList :items="$options.largePlan" />
         </div>
       </div>
-      <button>Get started</button>
+      <ButtonPrimary
+        type="submit"
+        label="Get Started"
+        :disabled="isDisabled"
+        :loader="isLoading"
+        class="block text-center font-semibold mr-auto ml-auto w-72 mt-20 p-3"
+      />
     </div>
   </section>
 </template>
