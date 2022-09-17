@@ -10,6 +10,7 @@
     <div class="flex-1 flex items-center justify-center">
       <div class="w-80 mx-auto">
         <div>
+          <!-- Email -->
           <label for="" class="block text-dark-500">Email</label>
           <input
             type="text"
@@ -19,6 +20,7 @@
           />
         </div>
         <div class="mt-4">
+          <!-- Password -->
           <label for="" class="block text-dark-500">Password</label>
           <input
             type="password"
@@ -28,14 +30,13 @@
           />
         </div>
         <div class="mt-5">
-          <button
-            class="block text-center bg-primary-500 hover:bg-dark-500 w-full p-3 text-white rounded transition-all duration-75"
-            @click="login"
-            :disabled="!email || !password"
-            :class="!email || !password ? 'cursor-not-allowed' : ''"
-          >
-            Sign in
-          </button>
+          <ButtonPrimary
+            label="Sign in"
+            @click.native="login"
+            :disabled="isDisabled"
+            :loader="isLoading"
+            class="block text-center w-full p-3"
+          />
         </div>
         <div class="mt-5 flex justify-between">
           <nuxt-link
@@ -69,34 +70,41 @@ export default {
       email: "",
       password: "",
       ipAddress: "",
+      isLoading: false,
     };
   },
   async created() {
     this.ipAddress = await this.getIpAddress();
   },
+  computed: {
+    isDisabled() {
+      if (this.email && this.password) return false;
+      else return true;
+    },
+  },
   methods: {
     getIpAddress,
 
     login() {
-      if (this.email !== "" || this.password !== "") {
-        this.$axios
-          .post("login", {
-            password: this.password,
-            email: this.email,
-            ip_address: this.ipAddress,
-          })
-          .then((res) => {
-            this.$toast.success(
-              "Login Successful. Welcome to TinyMiny Url Shortener."
-            );
+      this.isLoading = true;
+      this.$axios
+        .post("login", {
+          password: this.password,
+          email: this.email,
+          ip_address: this.ipAddress,
+        })
+        .then((res) => {
+          this.$toast.success(
+            "Login Successful. Welcome to TinyMiny Url Shortener."
+          );
 
-            this.$router.push("/");
-          })
-          .catch(({ response }) => {
-            console.log("error ", response);
-            showApiError(this, response.data);
-          });
-      }
+          this.$router.push("/");
+        })
+        .catch(({ response }) => {
+          console.log("error ", response);
+          showApiError(this, response.data);
+        })
+        .finally(() => (this.isLoading = false));
     },
   },
 };

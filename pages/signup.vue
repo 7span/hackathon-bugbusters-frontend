@@ -48,14 +48,13 @@
           />
         </div>
         <div class="mt-5">
-          <button
-            @click="signup"
+          <ButtonPrimary
+            label="Sign Up"
+            @click.native="signup"
             :disabled="isDisabled"
-            :class="isDisabled ? 'cursor-not-allowed' : ''"
-            class="block text-center bg-primary-500 hover:bg-dark-500 w-full p-3 text-white rounded transition-all duration-75"
-          >
-            Sign Up
-          </button>
+            :loader="isLoading"
+            class="block text-center w-full p-3"
+          />
         </div>
         <div class="mt-5 flex justify-between">
           <nuxt-link
@@ -84,6 +83,7 @@ export default {
       password: "",
       confirmPassword: "",
       ipAddress: "",
+      isLoading: false,
     };
   },
   async created() {
@@ -100,6 +100,7 @@ export default {
     getIpAddress,
     showApiError,
     signup() {
+      this.isLoading = true;
       this.$axios
         .post("signup", {
           name: this.name,
@@ -120,6 +121,9 @@ export default {
         .catch(({ response }) => {
           console.log("error ", response);
           showApiError(this, response.data);
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
   },
