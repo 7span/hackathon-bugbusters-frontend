@@ -34,18 +34,6 @@ export default {
     return {
       navs: [
         {
-          name: 'Home',
-          to: '#'
-        },
-        {
-          name: 'About',
-          to: '#'
-        },
-        {
-          name: 'Contact',
-          to: '#'
-        },
-        {
           name:'Login',
           to:'/login',
           isOutline:true

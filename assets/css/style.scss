@@ -1,9 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito+Sans:wght@300;400;700;800&display=swap');
-body{
-  @apply bg-gray-200
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Nunito+Sans:wght@300;400;700;800&display=swap");
+body {
+  @apply bg-white;
 }
-.nav-link{
-  & + .nav-link{
-    @apply ml-3
+.nav-link {
+  & + .nav-link {
+    @apply ml-3;
   }
+}
+.hero--image {
+  left: 40%;
 }
