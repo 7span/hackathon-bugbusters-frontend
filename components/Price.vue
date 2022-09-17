@@ -4,7 +4,10 @@
       <!-- section-title -->
       <div class="text-center mt-4 mb-20">
         <h2 class="text-4xl text-dark-500 font-semibold lg:text-7xl">
-          plan <span class="text-2xl lg:text-4xl font-thin">&</span> pricing
+          <span class="text-3xl italic font-medium text-dark-500 font-extrabold"
+            >plan &</span
+          >
+          <span class="text-primary-500">pricing</span>
         </h2>
       </div>
       <!-- section-content -->
@@ -13,7 +16,9 @@
         <div class="flex-1">
           <div class="pb-6 border-b border-dark-300">
             <h2 class="text-3xl h-14 font-semibold mb-4">tiny</h2>
-            <p class="text-4xl text-primary-500 font-semibold">$0</p>
+            <p class="text-4xl text-primary-500 font-semibold">
+              $0<span class="text-base text-dark-500"> / per month</span>
+            </p>
           </div>
           <ThePriceList :items="$options.tinyPlan" />
         </div>
@@ -21,7 +26,9 @@
         <div class="flex-1">
           <div class="pb-6 border-b border-dark-300">
             <h2 class="text-4xl h-14 font-semibold mb-4">small</h2>
-            <p class="text-4xl text-primary-500 font-semibold">$50</p>
+            <p class="text-4xl text-primary-500 font-semibold">
+              $50<span class="text-base text-dark-500"> / per month</span>
+            </p>
           </div>
           <ThePriceList :items="$options.smallPlan" />
         </div>
@@ -29,7 +36,9 @@
         <div class="flex-1">
           <div class="pb-6 border-b border-dark-300">
             <h2 class="text-5xl h-14 font-semibold mb-4">large</h2>
-            <p class="text-4xl text-primary-500 font-semibold">$150</p>
+            <p class="text-4xl text-primary-500 font-semibold">
+              $150 <span class="text-base text-dark-500"> / per month</span>
+            </p>
           </div>
           <ThePriceList :items="$options.largePlan" />
         </div>
