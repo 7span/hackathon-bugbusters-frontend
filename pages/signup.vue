@@ -9,54 +9,70 @@
     </div>
     <div class="flex-1 flex items-center justify-center">
       <div class="w-80 mx-auto">
-        <div>
-          <label for="" class="block text-dark-500">Name</label>
-          <input
-            type="text"
-            v-model="name"
-            placeholder="Ramesh"
-            class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
-          />
-        </div>
+        <form @submit.prevent="signup">
+          <div>
+            <!-- Name -->
 
-        <div class="mt-4">
-          <label for="" class="block text-dark-500">Email</label>
-          <input
-            type="text"
-            v-model="email"
-            placeholder="Enter Username"
-            class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
-          />
-        </div>
+            <label for="" class="block text-dark-500">Name</label>
+            <input
+              required
+              type="text"
+              v-model="name"
+              placeholder="Enter Name"
+              class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
+            />
+          </div>
 
-        <div class="mt-4">
-          <label for="" class="block text-dark-500">Password</label>
-          <input
-            type="password"
-            v-model="password"
-            placeholder="Enter Password"
-            class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
-          />
-        </div>
-        <div class="mt-4">
-          <label for="" class="block text-dark-500">Confirm Password</label>
-          <input
-            type="password"
-            v-model="confirmPassword"
-            placeholder="Enter Confirm Password"
-            class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
-          />
-        </div>
-        <div class="mt-5">
-          <button
-            @click="signup"
-            :disabled="isDisabled"
-            :class="isDisabled ? 'cursor-not-allowed' : ''"
-            class="block text-center bg-primary-500 hover:bg-dark-500 w-full p-3 text-white rounded transition-all duration-75"
-          >
-            Sign Up
-          </button>
-        </div>
+          <div class="mt-4">
+            <!-- Email -->
+            <label for="" class="block text-dark-500">Email</label>
+            <input
+              required
+              title="Invalid Email. Please enter appropriate email address."
+              pattern="\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+"
+              type="text"
+              v-model="email"
+              placeholder="Enter Email"
+              class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
+            />
+          </div>
+
+          <div class="mt-4">
+            <!-- Password -->
+            <label for="" class="block text-dark-500">Password</label>
+            <input
+              title="Minimum 8 characters required."
+              required
+              minlength="8"
+              type="password"
+              v-model="password"
+              placeholder="Enter Password"
+              class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
+            />
+          </div>
+          <div class="mt-4">
+            <!-- Confirm password -->
+            <label for="" class="block text-dark-500">Confirm Password</label>
+            <input
+              title="Minimum 8 characters required."
+              required
+              minlength="8"
+              type="password"
+              v-model="confirmPassword"
+              placeholder="Enter Confirm Password"
+              class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
+            />
+          </div>
+          <div class="mt-5">
+            <ButtonPrimary
+              label="Sign Up"
+              :disabled="isDisabled"
+              type="submit"
+              :loader="isLoading"
+              class="block text-center w-full p-3"
+            />
+          </div>
+        </form>
         <div class="mt-5 flex justify-between">
           <nuxt-link
             to="/login"
@@ -79,11 +95,12 @@ export default {
   },
   data() {
     return {
-      name: "",
-      email: "",
+      name: "asdas",
+      email: "aijdi2daim@aidai.com",
       password: "",
       confirmPassword: "",
       ipAddress: "",
+      isLoading: false,
     };
   },
   async created() {
@@ -100,6 +117,7 @@ export default {
     getIpAddress,
     showApiError,
     signup() {
+      this.isLoading = true;
       this.$axios
         .post("signup", {
           name: this.name,
@@ -120,6 +138,9 @@ export default {
         .catch(({ response }) => {
           console.log("error ", response);
           showApiError(this, response.data);
+        })
+        .finally(() => {
+          this.isLoading = false;
         });
     },
   },

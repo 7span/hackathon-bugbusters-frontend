@@ -4,6 +4,6 @@
     <div class="main-content">
     <Nuxt />
     </div>
-    <TheFooter />
+    <!-- <TheFooter /> -->
   </div>
 </template>
