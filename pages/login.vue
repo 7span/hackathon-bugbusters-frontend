@@ -10,10 +10,10 @@
     <div class="flex-1 flex items-center justify-center">
       <div class="w-80 mx-auto">
         <div>
-          <label for="" class="block text-dark-500">Username</label>
+          <label for="" class="block text-dark-500">Email</label>
           <input
             type="text"
-            v-model="username"
+            v-model="email"
             placeholder="Enter Username"
             class="
               block
@@ -57,6 +57,9 @@
               transition-all
               duration-75
             "
+            @click="login"
+            :disabled="!email && !password"
+            :class="!email && !password ? 'cursor-not-allowed' : ''"
           >
             Sign in
           </button>
@@ -72,7 +75,7 @@
               text-sm
             "
           >
-            <icones-add-account class="mr-1" /> Create New User
+            <icones-add-account class="mr-1 text-xl" /> Create New User
           </nuxt-link>
           <nuxt-link
             to="#"
@@ -84,7 +87,7 @@
               text-sm
             "
           >
-            <icones-reset class="mr-1" /> Forgot Password
+            <icones-reset class="mr-1 text-xl" /> Forgot Password
           </nuxt-link>
         </div>
       </div>
@@ -93,12 +96,36 @@
 </template>
 
 <script>
+import { showApiError } from "@/utilities/common";
+
 export default {
-  layout:"auth",
+  layout:'auth',
   data(){
     return{
-      username:"",
-      password:""
+      email:'',
+      password:'',
+      ip_address:'102.33.22.101'
+    }
+  },
+  methods: {
+    login(){
+      if(this.email !== '' || this.password !== ''){
+        this.$axios
+          .post("login", {
+            password:this.password,
+            email: this.email,
+            ip_address: this.ip_address,
+          })
+          .then((res) => {
+            this.$toast.success(
+              "Login Successful. Welcome to TinyMiny Url Shortener."
+            );
+          })
+          .catch(({ response }) => {
+            console.log("error ", response);
+            showApiError(this, response.data);
+          });
+      }
     }
   },
 };
