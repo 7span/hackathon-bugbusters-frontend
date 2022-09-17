@@ -30,33 +30,33 @@
 </template>
 <script>
 export default {
-  data () {
+  data() {
     return {
       navs: [
         {
-          name: 'Home',
-          to: '#'
+          name: "Home",
+          to: "#",
         },
         {
-          name: 'About',
-          to: '#'
+          name: "About",
+          to: "#",
         },
         {
-          name: 'Contact',
-          to: '#'
+          name: "Contact",
+          to: "#",
         },
         {
-          name:'Login',
-          to:'/login',
-          isOutline:true
+          name: "Login",
+          to: "/login",
+          isOutline: true,
         },
         {
-          name:'Register',
-          to:'/register',
-          isFill:true
-        }
-      ]
-    }
-  }
-}
+          name: "Signup",
+          to: "/signup",
+          isFill: true,
+        },
+      ],
+    };
+  },
+};
 </script>
