@@ -55,4 +55,7 @@ export default {
     },
     crossdomain: true,
   },
+  server: {
+    port: 8000,
+  },
 };
