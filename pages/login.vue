@@ -61,6 +61,9 @@ import { showApiError, getIpAddress } from "@/utilities/common";
 
 export default {
   layout: "auth",
+  head: {
+    title: `Login | ${process.env.NUXT_ENV_APPNAME}`,
+  },
   data() {
     return {
       email: "",
@@ -73,6 +76,7 @@ export default {
   },
   methods: {
     getIpAddress,
+
     login() {
       if (this.email !== "" || this.password !== "") {
         this.$axios

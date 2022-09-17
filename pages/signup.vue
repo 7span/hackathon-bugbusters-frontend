@@ -74,6 +74,9 @@
 import { getIpAddress, showApiError } from "@/utilities/common";
 export default {
   layout: "auth",
+  head: {
+    title: `Sign Up | ${process.env.NUXT_ENV_APPNAME}`,
+  },
   data() {
     return {
       name: "",
