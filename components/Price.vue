@@ -2,7 +2,7 @@
   <section class="py-22 lg:py-36 overflow-hidden">
     <div class="container">
       <!-- section-title -->
-      <div class="text-center mb-20 lg:mb-40">
+      <div class="text-center mt-4 mb-20 lg:mb-40">
         <h2 class="text-4xl font-semibold lg:text-7xl">paln <span class="text-2xl lg:text-4xl">&</span> pricing
         </h2>
       </div>
