@@ -1,4 +1,4 @@
-let baseUrl = "http://192.168.0.170:8888/api/v1";
+let baseUrl = "https://bugbusters-api.preview.im/api/v1/";
 
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
