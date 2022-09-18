@@ -15,14 +15,21 @@
             >download now :</label
           >
           <div class="flex">
-            <a href="javascript:;">
+            <a
+              href="https://drive.google.com/uc?export=download&id=1J4H6gwemqVXh4Ruf4zewAAlAjISq1cpE"
+              target="_blank"
+            >
               <img
                 src="/images/playstore.svg"
                 alt="Google Play Store"
                 class="h-14"
               />
             </a>
-            <a href="javascript:;" class="ml-2">
+            <a
+              href="https://drive.google.com/uc?export=download&id=1J4H6gwemqVXh4Ruf4zewAAlAjISq1cpE"
+              target="_blank"
+              class="ml-2"
+            >
               <img src="/images/app-store.svg" alt="App Store" class="h-14" />
             </a>
           </div>
