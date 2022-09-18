@@ -55,6 +55,7 @@
                       class="mr-2 text-2xl"
                       :class="isLoader ? 'animate-spin' : ''"
                     />
+
                     <span v-if="shortLink">Regenerate</span>
                     <span v-else>Make It Tinny</span>
                   </button>
@@ -69,14 +70,16 @@
         >
           <div class="flex items-center">
             <div class="relative rounded-xl overflow-hidden">
-              <qrcode-vue
+              <!-- <qrcode-vue
                 v-if="shortLink"
                 :value="shortLink"
                 render-as="svg"
                 size="60"
                 class="rounded-xl shadow-2xl borde"
               >
-              </qrcode-vue>
+              </qrcode-vue> -->
+
+              <img :src="`data:image/png;base64, ${barCode}`" v-if="barCode" />
               <!-- <div class="absolute inset-0 flex items-center justify-center">
                 <img
                   src="/images/tiny-miny-logo.svg"
@@ -104,20 +107,27 @@
             @click="copyLink"
             class="cursor-pointer text-gray-500 hover:text-gray-900"
           >
+            <!-- <div class="flex gap-2 ">  -->
+
             <icones-copy />
+
+            <!-- </div> -->
+            <!-- <IconesLoader class="mx-2 text-2xl animate-spin" /> -->
           </p>
+          <!-- <IconesDownloadOutlineRounded /> -->
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import QrcodeVue from "qrcode.vue";
+// import QrcodeVue from "qrcode.vue";
 export default {
   data() {
     return {
       main_url: "",
       user_id: "",
+      barCode: "",
       format: [],
       combinations: [
         {
@@ -132,6 +142,10 @@ export default {
           label: "0-9",
           value: "digits",
         },
+        {
+          label: "Random",
+          value: "random",
+        },
       ],
       isGenerated: false,
       isLoader: false,
@@ -139,12 +153,12 @@ export default {
     };
   },
   components: {
-    QrcodeVue,
+    // QrcodeVue,
   },
   methods: {
     generate() {
-      this.isLoader = true;
       if (this.main_url !== "") {
+        this.isLoader = true;
         this.$axios
           .post("generate-short-url", {
             main_url: this.main_url,
@@ -152,9 +166,11 @@ export default {
             format: this.format,
           })
           .then((response) => {
+            const data = response.data.data;
             this.isGenerated = true;
             this.isLoader = false;
-            this.shortLink = response.data.data.short_url;
+            this.shortLink = data.short_url;
+            this.barCode = data.barcode;
             // this.$toast.success(
             //   "Login Successful. Welcome to TinyMiny Url Shortener."
             // );
