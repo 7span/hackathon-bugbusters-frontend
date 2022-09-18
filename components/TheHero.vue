@@ -112,6 +112,7 @@
                       class="mr-2 text-2xl"
                       :class="isLoader ? 'animate-spin' : ''"
                     />
+
                     <span v-if="shortLink">Regenerate</span>
                     <span v-else>Make It Tiny</span>
                   </button>
@@ -136,14 +137,23 @@
         >
           <div class="flex items-center">
             <div class="relative rounded-xl overflow-hidden">
-              <qrcode-vue
+              <!-- <qrcode-vue
                 v-if="shortLink"
                 :value="shortLink"
                 render-as="svg"
                 size="60"
                 class="rounded-xl shadow-2xl borde"
               >
-              </qrcode-vue>
+              </qrcode-vue> -->
+
+              <a
+                v-if="barCode"
+                :href="`data:image/png;base64, ${barCode}`"
+                download
+              >
+                <img :src="`data:image/png;base64, ${barCode}`" width="100" />
+              </a>
+
               <!-- <div class="absolute inset-0 flex items-center justify-center">
                 <img
                   src="/images/tiny-miny-logo.svg"
@@ -151,7 +161,7 @@
                 />
               </div> -->
             </div>
-            <a
+            <!-- <a
               :href="shortLink"
               target="_blank"
               class="
@@ -162,13 +172,37 @@
                 hover:text-primary-500
               "
               >{{ shortLink }}</a
+            > -->
+
+            <nuxt-link
+              class="text-lg text-gray-500 ml-5 hover:text-primary-500"
+              :to="{
+                name: 'url-id',
+                params: { id: shortLink.split('/').pop() },
+              }"
+              >{{ shortLink }}</nuxt-link
             >
           </div>
-          <p
-            @click="copyLink"
-            class="cursor-pointer text-gray-500 hover:text-gray-900"
-          >
-            <icones-copy />
+
+          <p class="cursor-pointer flex gap-2">
+            <!-- <div class="flex gap-2 ">  -->
+
+            <icones-copy
+              class="w-6 h-6 text-gray-500 hover:text-gray-900"
+              @click.native="copyLink"
+            />
+
+            <!-- </div> -->
+            <!-- <IconesLoader class="mx-2 text-2xl animate-spin" /> -->
+            <a
+              v-if="barCode"
+              :href="`data:image/png;base64, ${barCode}`"
+              download
+            >
+              <IconesDownloadOutlineRounded
+                class="w-6 h-6 text-gray-500 hover:text-gray-900"
+              />
+            </a>
           </p>
         </div>
       </div>
@@ -176,12 +210,13 @@
   </div>
 </template>
 <script>
-import QrcodeVue from "qrcode.vue";
+// import QrcodeVue from "qrcode.vue";
 export default {
   data() {
     return {
       main_url: "",
       user_id: "",
+      barCode: "",
       format: [],
       combinations: [
         {
@@ -196,6 +231,10 @@ export default {
           label: "0-9",
           value: "digits",
         },
+        {
+          label: "Random",
+          value: "random",
+        },
       ],
       isGenerated: false,
       isLoader: false,
@@ -203,12 +242,12 @@ export default {
     };
   },
   components: {
-    QrcodeVue,
+    // QrcodeVue,
   },
   methods: {
     generate() {
-      this.isLoader = true;
       if (this.main_url !== "") {
+        this.isLoader = true;
         this.$axios
           .post("generate-short-url", {
             main_url: this.main_url,
@@ -216,9 +255,11 @@ export default {
             format: this.format,
           })
           .then((response) => {
+            const data = response.data.data;
             this.isGenerated = true;
             this.isLoader = false;
-            this.shortLink = response.data.data.short_url;
+            this.shortLink = data.short_url;
+            this.barCode = data.barcode;
             // this.$toast.success(
             //   "Login Successful. Welcome to TinyMiny Url Shortener."
             // );

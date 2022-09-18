@@ -5,6 +5,11 @@ let baseUrl = "https://bugbusters-api.preview.im/api/v1/";
 const appName = "TinyMiny | URL Shortner";
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
+  generate: {
+    // crawler: false,
+    fallback: true,
+  },
+
   head: {
     title: appName,
     htmlAttrs: {
@@ -13,8 +18,18 @@ export default {
     meta: [
       { charset: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { hid: "description", name: "description", content: "" },
       { name: "format-detection", content: "telephone=no" },
+      { name: "title", content: "tinyminy" },
+      {
+        name: "description",
+        content: "To generate the short url from the long url",
+      },
+      { name: "keywords", content: "short-url, shorten-url,tiny-miny" },
+      { name: "robots", content: "index,follow" },
+      { name: "robots", content: "text/html; charset=utf-8" },
+      { name: "language", content: "English" },
+      { name: "revisit-after", content: "1 day" },
+      { name: "author", content: "Bug Busters" },
     ],
     link: [
       { rel: "icon", type: "image/x-icon", href: "/favicon.png" },
