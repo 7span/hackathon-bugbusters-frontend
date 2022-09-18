@@ -1,5 +1,10 @@
 <template>
-  <div></div>
+  <div class="flex w-screen h-screen justify-center items-center">
+    <div>
+      Redirecting...
+      <IconesLoader class="mr-2 text-2xl animate-spin" />
+    </div>
+  </div>
 </template>
 
 <script>

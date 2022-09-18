@@ -4,19 +4,7 @@
       <div class="max-w-3xl mx-auto relative">
         <div class="relative overflow-hidden pt-9">
           <h1
-            class="
-              text-white text-5xl
-              sm:text-6xl
-              lg:text-7xl
-              font-extrabold
-              sm:text-center sm:flex
-              items-center
-              justify-center
-              relative
-              z-10
-              mt-2
-              shadow-black
-            "
+            class="text-white text-5xl sm:text-6xl lg:text-7xl font-extrabold sm:text-center sm:flex items-center justify-center relative z-10 mt-2 shadow-black"
           >
             Make your
             <span class="flex items-center"
@@ -27,15 +15,7 @@
             >
           </h1>
           <div
-            class="
-              hidden
-              sm:block sm:w-96
-              absolute
-              top-5
-              lg:top-6
-              inset-x-0
-              mx-auto
-            "
+            class="hidden sm:block sm:w-96 absolute top-5 lg:top-6 inset-x-0 mx-auto"
           >
             <img
               src="/images/hand.png"
@@ -52,13 +32,7 @@
                 type="text"
                 v-model="main_url"
                 placeholder="Enter your URL here..."
-                class="
-                  w-full
-                  focus:outline-none
-                  pt-3
-                  pb-4
-                  border-b border-gray-300
-                "
+                class="w-full focus:outline-none pt-3 pb-4 border-b border-gray-300"
               />
               <div class="mt-5">
                 <label
@@ -89,23 +63,7 @@
                   </div>
 
                   <button
-                    class="
-                      py-2
-                      px-4
-                      bg-dark-500
-                      hover:bg-dark-800
-                      text-white
-                      rounded
-                      sm:ml-auto
-                      font-bold
-                      flex
-                      items-center
-                      w-full
-                      sm:w-auto
-                      justify-center
-                      mt-4
-                      sm:mt-0
-                    "
+                    class="py-2 px-4 bg-dark-500 hover:bg-dark-800 text-white rounded sm:ml-auto font-bold flex items-center w-full sm:w-auto justify-center mt-4 sm:mt-0"
                     type="submit"
                     :class="main_url == '' ? 'cursor-not-allowed' : ''"
                   >
@@ -126,17 +84,7 @@
         </div>
         <div
           v-if="isGenerated"
-          class="
-            p-5
-            sm:p-6
-            rounded-2xl
-            bg-white
-            mt-4
-            block
-            sm:flex
-            items-center
-            justify-between
-          "
+          class="p-5 sm:p-6 rounded-2xl bg-white mt-4 block sm:flex items-center justify-between"
         >
           <div class="flex items-center">
             <div class="relative rounded-xl overflow-hidden">
@@ -224,7 +172,7 @@ export default {
     return {
       main_url: "",
       barCode: "",
-      format: ['random'],
+      format: ["random"],
       combinations: [
         {
           label: "A-Z",
@@ -238,10 +186,10 @@ export default {
           label: "0-9",
           value: "digits",
         },
-          {
-            label: "Random",
-            value: "random",
-          },
+        {
+          label: "Random",
+          value: "random",
+        },
       ],
       isGenerated: false,
       isLoader: false,
@@ -250,9 +198,6 @@ export default {
   },
   components: {
     UrlList,
-  },
-  computed: {
-    ...mapGetters(["getUser"]),
   },
   methods: {
     generate() {
