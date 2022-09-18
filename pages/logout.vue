@@ -4,17 +4,19 @@
 
 <script>
 export default {
+  layout: "auth",
   created() {
-    this.$axios.post("logout").then(() => {
+    if (process.client) {
       const token = localStorage.getItem("token");
       this.$axios.setToken(token, "Bearer");
+      this.$axios.post("logout").then(() => {
+        localStorage.removeItem("token");
 
-      localStorage.removeItem("token");
+        this.$router.push({ name: "signin" });
 
-      this.$router.push({ name: "signin" });
-
-      this.$toast.success("Logout success.");
-    });
+        this.$toast.success("Logout success.");
+      });
+    }
   },
 };
 </script>
