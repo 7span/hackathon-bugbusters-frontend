@@ -51,13 +51,9 @@ export default {
     };
   },
   created() {
-    console.log(this.getUser);
     if(process.client){
       if(localStorage.getItem('token')){
-        console.log('IN');
         this.getUrlList();
-      }else{
-        console.log('OUT');
       }
     }
     

@@ -280,7 +280,6 @@ export default {
             // );
           })
           .catch(({ response }) => {
-            console.log("error ", response);
             this.isLoader = false;
             showApiError(this, response.data);
           });

@@ -208,7 +208,6 @@ export default {
           this.afterSignup();
         })
         .catch(({ response }) => {
-          console.log("error ", response.data);
           showApiError(this, response.data);
         })
         .finally(() => {

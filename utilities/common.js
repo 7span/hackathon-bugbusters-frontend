@@ -21,12 +21,9 @@ export const getApiErrorFormat = (response) => {
 
 export const showApiError = (instance, error) => {
   const result = getApiErrorFormat(error);
-  console.log("result from get api error format", result);
   if (result.errors) {
     const errors = result.errors;
     const errorKeys = Object.keys(errors);
-
-    console.log("error keys", errorKeys, "erorrs", errors);
 
     instance.$toast.error(errors[errorKeys[0]][0]);
   }

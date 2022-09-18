@@ -166,7 +166,6 @@ export default {
           this.afterLogin(response.data);
         })
         .catch(({ response }) => {
-          console.log("error ", response);
           showApiError(this, response.data);
         })
         .finally(() => (this.isLoading = false));
