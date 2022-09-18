@@ -1,9 +1,17 @@
 <template>
-  <section id="features" class="py-24 bg-primary-500">
+  <section id="features" class="py-14 sm:py-24 bg-primary-500">
     <div class="container">
       <div class="text-center">
         <h2 class="text-4xl mb-8 font-semibold lg:text-6xl text-white">
-          <span class="text-3xl italic font-medium text-dark-500 font-extrabold"
+          <span
+            class="
+              text-xl
+              sm:text-3xl
+              italic
+              font-medium
+              text-dark-500
+              font-extrabold
+            "
             >Our</span
           >
           <span>features</span>
@@ -14,12 +22,27 @@
           direct to the same web pages.
         </p> -->
       </div>
-      <div class="flex justify-between flex-wrap mt-16 max-w-4xl mx-auto">
+      <div
+        class="
+          block
+          sm:flex
+          justify-between
+          flex-wrap
+          mt-10
+          sm:mt-16
+          max-w-4xl
+          mx-auto
+        "
+      >
         <div
           v-for="(feature, index) in features"
           :key="index"
           class="flex-1"
-          :class="index !== 0 ? 'border-l border-dashed border-gray-200' : ''"
+          :class="
+            index !== 0
+              ? 'border-t sm:border-t-0 mt-5 sm:mt-0 sm:border-l border-dashed border-gray-200'
+              : ''
+          "
         >
           <div class="flex-1">
             <div class="p-6">

@@ -1,13 +1,41 @@
 <template>
-  <div class="flex h-screen">
-    <div class="bg-primary-500 flex-1 flex items-center justify-center">
+  <div class="block sm:flex h-screen">
+    <div
+      class="
+        bg-primary-500
+        flex-1 flex
+        items-center
+        justify-center
+        p-5
+        sm:p-0
+        relative
+      "
+    >
+      <nuxt-link
+        to="/"
+        class="
+          absolute
+          top-5
+          left-5
+          w-10
+          h-10
+          rounded-full
+          bg-white
+          flex
+          items-center
+          justify-center
+          text-2xl text-primary-500
+        "
+      >
+        <IconesHome />
+      </nuxt-link>
       <img
         src="/images/tiny-miny-logo-white.png"
-        class="w-80"
+        class="w-44 sm:w-80"
         alt="Tiny Miny Logo"
       />
     </div>
-    <div class="flex-1 flex items-center justify-center">
+    <div class="flex-1 flex items-center justify-center p-4 sm:p-0">
       <div class="w-80 mx-auto">
         <form @submit.prevent="signup">
           <div>
@@ -19,7 +47,15 @@
               type="text"
               v-model="name"
               placeholder="Enter Name"
-              class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
+              class="
+                block
+                p-3
+                border
+                rounded
+                border-gray-300
+                w-full
+                focus:outline-none
+              "
             />
           </div>
 
@@ -33,7 +69,15 @@
               type="text"
               v-model="email"
               placeholder="Enter Email"
-              class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
+              class="
+                block
+                p-3
+                border
+                rounded
+                border-gray-300
+                w-full
+                focus:outline-none
+              "
             />
           </div>
 
@@ -47,7 +91,15 @@
               type="password"
               v-model="password"
               placeholder="Enter Password"
-              class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
+              class="
+                block
+                p-3
+                border
+                rounded
+                border-gray-300
+                w-full
+                focus:outline-none
+              "
             />
           </div>
           <div class="mt-4">
@@ -60,7 +112,15 @@
               type="password"
               v-model="confirmPassword"
               placeholder="Enter Confirm Password"
-              class="block p-3 border rounded border-gray-300 w-full focus:outline-none"
+              class="
+                block
+                p-3
+                border
+                rounded
+                border-gray-300
+                w-full
+                focus:outline-none
+              "
             />
           </div>
           <div class="mt-5">
@@ -76,7 +136,13 @@
         <div class="mt-5 flex justify-between">
           <nuxt-link
             to="/signin"
-            class="text-gray-500 hover:text-primary-500 flex items-center text-sm"
+            class="
+              text-gray-500
+              hover:text-primary-500
+              flex
+              items-center
+              text-sm
+            "
           >
             <icones-add-account class="mr-1" /> Already Have an Account
           </nuxt-link>

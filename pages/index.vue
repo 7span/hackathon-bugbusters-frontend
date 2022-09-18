@@ -5,6 +5,7 @@
     <Features />
     <Price />
     <TheCta />
+    <HowItWorks />
   </div>
 </template>
 
@@ -19,11 +20,11 @@ export default {
   },
 
   created() {
-    // this.hydrate();
-    // const token = getToken();
-    // if (token) {
-    //   this.$axios.setToken(token, "Bearer");
-    // } else this.$router.push({ name: "login" });
+    this.hydrate();
+    const token = getToken();
+    if (token) {
+      this.$axios.setToken(token, "Bearer");
+    }
   },
   methods: {
     getToken,
@@ -32,7 +33,7 @@ export default {
     hydrate() {
       console.log("user", this.getUser);
       this.$axios.get("me").then((response) => {
-        this.setUser(response);
+        this.setUser(response.data);
       });
     },
   },

@@ -4,22 +4,61 @@
       <div class="max-w-3xl mx-auto relative">
         <div class="relative overflow-hidden pt-9">
           <h1
-            class="text-white text-7xl font-extrabold text-center flex items-center justify-center relative z-10 mt-2 shadow-black"
+            class="
+              text-white text-5xl
+              sm:text-6xl
+              lg:text-7xl
+              font-extrabold
+              sm:text-center sm:flex
+              items-center
+              justify-center
+              relative
+              z-10
+              mt-2
+              shadow-black
+            "
           >
             Make your
-            <b class="text-2xl mx-4 mt-2 text-dark-500">&lt;URL&gt;</b> tiny
+            <span class="flex items-center"
+              ><b class="text-2xl mx-4 text-dark-500 inline-block mt-2"
+                >&lt;URL&gt;</b
+              >
+              tiny</span
+            >
           </h1>
-          <div class="w-96 absolute top-6 inset-x-0 mx-auto">
-            <img src="/images/hand.png" class="-ml-11" alt="" />
+          <div
+            class="
+              hidden
+              sm:block sm:w-96
+              absolute
+              top-5
+              lg:top-6
+              inset-x-0
+              mx-auto
+            "
+          >
+            <img
+              src="/images/hand.png"
+              class="sm:-ml-20 lg:-ml-11 hand-image"
+              alt=""
+            />
           </div>
-          <div class="p-6 rounded-2xl bg-white mt-40 relative z-10">
+          <div
+            class="p-5 sm:p-6 rounded-2xl bg-white mt-5 sm:mt-40 relative z-10"
+          >
             <form @submit.prevent="generate">
               <input
                 pattern="https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,63}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)"
                 type="text"
                 v-model="main_url"
                 placeholder="Enter your URL here..."
-                class="w-full focus:outline-none pt-3 pb-4 border-b border-gray-300"
+                class="
+                  w-full
+                  focus:outline-none
+                  pt-3
+                  pb-4
+                  border-b border-gray-300
+                "
               />
               <div class="mt-5">
                 <label
@@ -27,27 +66,48 @@
                   class="text-dark-500 text-base font-bold mb-2 block"
                   >Combination</label
                 >
-                <div class="flex items-center -mt-3">
-                  <div
-                    v-for="(item, index) in combinations"
-                    :key="index"
-                    class="custom-checkbox"
-                    :class="index !== 0 ? 'ml-5' : ''"
-                  >
-                    <input
-                      type="checkbox"
-                      :id="'combinations-' + index"
-                      v-model="format"
-                      :value="item.value"
-                    />
-                    <label :for="'combinations-' + index">{{
-                      item.label
-                    }}</label>
+                <div class="block sm:flex items-center sm:-mt-3">
+                  <div class="flex flex-wrap sm:flex-none items-center">
+                    <div
+                      v-for="(item, index) in combinations"
+                      :key="index"
+                      class="custom-checkbox"
+                      :class="
+                        index !== 0 ? 'p-2 sm:p-0 sm:ml-5' : 'p-2 sm:p-0 '
+                      "
+                    >
+                      <input
+                        type="checkbox"
+                        :id="'combinations-' + index"
+                        v-model="format"
+                        :value="item.value"
+                      />
+                      <label :for="'combinations-' + index">{{
+                        item.label
+                      }}</label>
+                    </div>
                   </div>
 
                   <button
-                    class="py-2 px-4 bg-dark-500 hover:bg-dark-800 text-white rounded ml-auto font-bold flex items-center"
+                    class="
+                      py-2
+                      px-4
+                      bg-dark-500
+                      hover:bg-dark-800
+                      text-white
+                      rounded
+                      sm:ml-auto
+                      font-bold
+                      flex
+                      items-center
+                      w-full
+                      sm:w-auto
+                      justify-center
+                      mt-4
+                      sm:mt-0
+                    "
                     type="submit"
+                    :class="main_url == '' ? 'cursor-not-allowed' : ''"
                   >
                     <!-- @click="generate" -->
                     <IconesLoader
@@ -66,7 +126,17 @@
         </div>
         <div
           v-if="isGenerated"
-          class="p-6 rounded-2xl bg-white mt-4 flex items-center justify-between"
+          class="
+            p-5
+            sm:p-6
+            rounded-2xl
+            bg-white
+            mt-4
+            block
+            sm:flex
+            items-center
+            justify-between
+          "
         >
           <div class="flex items-center">
             <div class="relative rounded-xl overflow-hidden">
@@ -97,7 +167,13 @@
             <!-- <a
               :href="shortLink"
               target="_blank"
-              class="text-lg text-gray-500 ml-5 hover:text-primary-500"
+              class="
+                my-2
+                sm:my-0
+                text-lg text-gray-500
+                sm:ml-5
+                hover:text-primary-500
+              "
               >{{ shortLink }}</a
             > -->
 
@@ -133,12 +209,13 @@
           </p>
         </div>
       </div>
+      <UrlList />
     </div>
   </div>
 </template>
 <script>
-// import QrcodeVue from "qrcode.vue";
 import { mapGetters } from "vuex";
+import UrlList from "./UrlList.vue";
 export default {
   computed: {
     ...mapGetters(["getUserId"]),
@@ -147,7 +224,7 @@ export default {
     return {
       main_url: "",
       barCode: "",
-      format: [],
+      format: ['random'],
       combinations: [
         {
           label: "A-Z",
@@ -161,10 +238,10 @@ export default {
           label: "0-9",
           value: "digits",
         },
-        {
-          label: "Random",
-          value: "random",
-        },
+          {
+            label: "Random",
+            value: "random",
+          },
       ],
       isGenerated: false,
       isLoader: false,
@@ -172,7 +249,10 @@ export default {
     };
   },
   components: {
-    // QrcodeVue,
+    UrlList,
+  },
+  computed: {
+    ...mapGetters(["getUser"]),
   },
   methods: {
     generate() {
@@ -193,6 +273,8 @@ export default {
             this.isLoader = false;
             this.shortLink = data.short_url;
             this.barCode = data.barcode;
+            this.isGenerated = true;
+            this.isLoader = false;
             // this.$toast.success(
             //   "Login Successful. Welcome to TinyMiny Url Shortener."
             // );
@@ -213,3 +295,10 @@ export default {
   },
 };
 </script>
+<style lang="scss">
+@media (max-width: 767px) {
+  .hand-image {
+    transform: scaleX(-1);
+  }
+}
+</style>
