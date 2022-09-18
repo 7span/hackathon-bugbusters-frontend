@@ -8,6 +8,7 @@
 
         <nav>
           <nuxt-link
+            v-if="nav.show"
             v-for="(nav, index) in navs"
             :key="index"
             :to="nav.to"
@@ -28,31 +29,43 @@
   </header>
 </template>
 <script>
+import { getToken } from "@/utilities/common";
 export default {
   data() {
     return {
       navs: [
         {
-          name:"About",
-          to:"#about"
+          name: "About",
+          to: "#about",
+          show: true,
         },
         {
-          name:"Features",
-          to:"#features"
+          name: "Features",
+          to: "#features",
+          show: true,
         },
         {
-          name:"Pricing",
-          to:"#pricing"
+          name: "Pricing",
+          to: "#pricing",
+          show: true,
         },
         {
           name: "Sign In",
           to: "/signin",
           isOutline: true,
+          show: this.showMenu(),
         },
         {
           name: "Sign Up",
           to: "/signup",
           isFill: true,
+          show: this.showMenu(),
+        },
+        {
+          name: "Logout",
+          to: "/logout",
+          isFill: true,
+          show: !this.showMenu(),
         },
         // {
         //   name: "Login",
@@ -66,6 +79,14 @@ export default {
         // },
       ],
     };
+  },
+  methods: {
+    getToken,
+    showMenu() {
+      const token = this.getToken();
+      if (token) return false;
+      else return true;
+    },
   },
 };
 </script>

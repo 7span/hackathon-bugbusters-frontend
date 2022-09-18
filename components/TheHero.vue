@@ -84,7 +84,7 @@
                 :href="`data:image/png;base64, ${barCode}`"
                 download
               >
-                <img :src="`data:image/png;base64, ${barCode}`" />
+                <img :src="`data:image/png;base64, ${barCode}`" width="100" />
               </a>
 
               <!-- <div class="absolute inset-0 flex items-center justify-center">
@@ -110,24 +110,27 @@
               >{{ shortLink }}</nuxt-link
             >
           </div>
-          <p
-            @click="copyLink"
-            class="cursor-pointer text-gray-500 hover:text-gray-900"
-          >
+
+          <p class="cursor-pointer flex gap-2">
             <!-- <div class="flex gap-2 ">  -->
 
-            <icones-copy />
+            <icones-copy
+              class="w-6 h-6 text-gray-500 hover:text-gray-900"
+              @click.native="copyLink"
+            />
 
             <!-- </div> -->
             <!-- <IconesLoader class="mx-2 text-2xl animate-spin" /> -->
+            <a
+              v-if="barCode"
+              :href="`data:image/png;base64, ${barCode}`"
+              download
+            >
+              <IconesDownloadOutlineRounded
+                class="w-6 h-6 text-gray-500 hover:text-gray-900"
+              />
+            </a>
           </p>
-          <a
-            v-if="barCode"
-            :href="`data:image/png;base64, ${barCode}`"
-            download
-          >
-            <IconesDownloadOutlineRounded />
-          </a>
         </div>
       </div>
     </div>
