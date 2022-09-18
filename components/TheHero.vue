@@ -79,7 +79,14 @@
               >
               </qrcode-vue> -->
 
-              <img :src="`data:image/png;base64, ${barCode}`" v-if="barCode" />
+              <a
+                v-if="barCode"
+                :href="`data:image/png;base64, ${barCode}`"
+                download
+              >
+                <img :src="`data:image/png;base64, ${barCode}`" />
+              </a>
+
               <!-- <div class="absolute inset-0 flex items-center justify-center">
                 <img
                   src="/images/tiny-miny-logo.svg"
@@ -114,7 +121,13 @@
             <!-- </div> -->
             <!-- <IconesLoader class="mx-2 text-2xl animate-spin" /> -->
           </p>
-          <!-- <IconesDownloadOutlineRounded /> -->
+          <a
+            v-if="barCode"
+            :href="`data:image/png;base64, ${barCode}`"
+            download
+          >
+            <IconesDownloadOutlineRounded />
+          </a>
         </div>
       </div>
     </div>
