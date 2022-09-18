@@ -26,8 +26,6 @@
             <!-- Password -->
             <label for="" class="block text-dark-500">Password</label>
             <input
-              title="Minimum 8 characters required."
-              minlength="8"
               type="password"
               v-model="password"
               placeholder="Enter Password"
@@ -51,12 +49,12 @@
           >
             <icones-add-account class="mr-1 text-xl" /> Create New User
           </nuxt-link>
-          <nuxt-link
+          <!-- <nuxt-link
             to="#"
             class="text-primary-500 hover:text-primary-500 flex items-center text-sm"
           >
             <icones-reset class="mr-1 text-xl" /> Forgot Password
-          </nuxt-link>
+          </nuxt-link> -->
         </div>
       </div>
     </div>

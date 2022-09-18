@@ -7,14 +7,16 @@ export const mutations = {
     state.user = data;
   },
   resetStore(state) {
-    state = {
-      user: {},
-    };
+    state.user = {};
   },
 };
 
 export const getters = {
   getUser(state) {
     return state.user;
+  },
+
+  getUserId(state) {
+    return state.user && state.user.id;
   },
 };

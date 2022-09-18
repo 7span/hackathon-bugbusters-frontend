@@ -57,7 +57,7 @@
                     />
 
                     <span v-if="shortLink">Regenerate</span>
-                    <span v-else>Make It Tinny</span>
+                    <span v-else>Make It Tiny</span>
                   </button>
                 </div>
               </div>
@@ -138,11 +138,14 @@
 </template>
 <script>
 // import QrcodeVue from "qrcode.vue";
+import { mapGetters } from "vuex";
 export default {
+  computed: {
+    ...mapGetters(["getUserId"]),
+  },
   data() {
     return {
       main_url: "",
-      user_id: "",
       barCode: "",
       format: [],
       combinations: [
@@ -175,12 +178,15 @@ export default {
     generate() {
       if (this.main_url !== "") {
         this.isLoader = true;
+        let params = {
+          main_url: this.main_url,
+
+          format: this.format,
+        };
+        if (this.getUserId) params.user_id = this.getUserId;
+
         this.$axios
-          .post("generate-short-url", {
-            main_url: this.main_url,
-            user_id: this.user_id,
-            format: this.format,
-          })
+          .post("generate-short-url", params)
           .then((response) => {
             const data = response.data.data;
             this.isGenerated = true;
@@ -199,8 +205,10 @@ export default {
       }
     },
     copyLink() {
-      navigator.clipboard.writeText(this.shortLink);
-      this.$toast.success("Link Copied");
+      if (process.client) {
+        navigator.clipboard.writeText(this.shortLink);
+        this.$toast.success("Link Copied");
+      }
     },
   },
 };
