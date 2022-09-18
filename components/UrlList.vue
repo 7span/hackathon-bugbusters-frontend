@@ -1,6 +1,7 @@
 <template>
   <div
     class="max-w-3xl mt-6 mr-auto ml-auto bg-white rounded-2xl p-6 overflow-auto min-w-[300px]"
+    v-if="urls.length > 0"
   >
     <table class="rounded-2xl">
       <thead class="text-center">
@@ -19,48 +20,19 @@
           v-for="(url, index) in urls"
           :key="index"
         >
-          <td class="p-2 text-dark-400">{{ url.main_url }}</td>
-          <td class="p-2 text-dark-400">{{ url.short_url }}</td>
-          <td class="p-2 text-dark-400 text-center">{{ url.counts }}</td>
-          <td class="p-2 text-dark-400 text-center">{{ url.status }}</td>
+          <td class="p-2 text-dark-400 w-1/2">
+            <span class="list break-words w-32">{{ url.main_url }}</span>
+          </td>
+          <td class="p-2 text-dark-400 w-1/5">{{ url.short_url }}</td>
+          <td class="p-2 text-dark-400 text-center w-1/5">
+            {{ url.counts }}
+          </td>
+          <td class="p-2 text-dark-400 text-center w-1/5 text-green-500">
+            {{ url.status }}
+          </td>
         </tr>
       </tbody>
     </table>
-
-    <!-- <div class="flex flex-wrap m-2" v-for="(url, index) in urls" :key="index">
-      <div class="w-1/2">
-        <div class="border h-full p-3 break-words">
-          <span
-            class="block text-center text-lg font-bold border-b-1 border-black mb-2"
-            >Original Url </span
-          >{{ url.main_url }}
-        </div>
-      </div>
-      <div class="w-1/2">
-        <div class="border h-full p-3 break-words">
-          <span class="block text-center text-lg font-bold bg-[#bf949494]"
-            >Short Url
-          </span>
-          {{ url.short_url }}
-        </div>
-      </div>
-      <div class="w-1/2">
-        <div class="border h-full p-3 text-center break-words">
-          <span class="block text-center text-lg font-bold bg-[#bf949494]"
-            >Count
-          </span>
-          {{ url.counts }}
-        </div>
-      </div>
-      <div class="w-1/2">
-        <div class="border h-full p-3 text-center break-words">
-          <span class="block text-center text-lg font-bold bg-[#bf949494]"
-            >Status
-          </span>
-          {{ url.status }}
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -84,7 +56,7 @@ export default {
   methods: {
     getUrlList() {
       this.$axios
-        .get("get-urls")
+        .get("get-urls", { params: { status: "active" } })
         .then((res) => res.data)
         .then((res) => {
           this.urls = res.data;
