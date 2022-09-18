@@ -1,5 +1,5 @@
 <template>
-  <section class="py-14 overflow-hidden">
+  <section class="py-14 overflow-hidden" id="pricing">
     <div class="container">
       <!-- section-title -->
       <div class="text-center mt-4 mb-20">
@@ -56,7 +56,6 @@
 
 <script>
 export default {
-  
   tinyPlan: [
     "Branded domains",
     "Links / redirects",
@@ -83,11 +82,11 @@ export default {
     "Team",
     "Team communiactor",
   ],
-  data(){
-    return{
-      isDisabled:false,
-      isLoading:false,
-    }
-  }
+  data() {
+    return {
+      isDisabled: false,
+      isLoading: false,
+    };
+  },
 };
 </script>

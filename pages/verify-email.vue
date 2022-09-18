@@ -19,7 +19,6 @@ export default {
     verifyEmail(token) {
       this.$axios
         .post("verify-email", {
-          request_from: "web",
           token: token,
         })
         .then((response) => {

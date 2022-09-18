@@ -6,6 +6,7 @@
 import { mapGetters } from "vuex";
 
 export default {
+  layout: "auth",
   created() {
     console.log("insisde created");
     if (process.client) this.redirectShortUrl();
