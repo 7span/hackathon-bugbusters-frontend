@@ -1,5 +1,5 @@
 <template>
-  <section class="py-14 overflow-hidden">
+  <section class="py-14 overflow-hidden" id="pricing">
     <div class="container">
       <!-- section-title -->
       <div class="text-center mt-4 mb-10 sm:mb-20">
@@ -97,7 +97,6 @@
 
 <script>
 export default {
-  
   tinyPlan: [
     "Generate the short URL with user’s custom domain",
     "Generate short URL with multiple domain names",

@@ -5,7 +5,6 @@
 <script>
 export default {
   created() {
-    console.log("insisde created layouts");
     if (process.client) this.redirectShortUrl();
   },
   methods: {

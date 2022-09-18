@@ -3,22 +3,29 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
+  layout: "auth",
   created() {
     console.log("insisde created");
     if (process.client) this.redirectShortUrl();
+  },
+  computed: {
+    ...mapGetters(["getUserId"]),
   },
   methods: {
     redirectShortUrl() {
       const shortUrl = window.location.pathname.split("/").pop();
 
-      this.$axios
-        .post("fetch-main-url", {
-          short_url: shortUrl,
-        })
-        .then((response) => {
-          window.location.href = response.data.data.main_url;
-        });
+      let params = {
+        short_url: shortUrl,
+      };
+
+      if (this.getUserId) params.user_id = this.getUserId;
+      this.$axios.post("fetch-main-url", params).then((response) => {
+        window.location.href = response.data.data.main_url;
+      });
     },
   },
 };
