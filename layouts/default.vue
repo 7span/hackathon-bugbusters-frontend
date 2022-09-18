@@ -2,8 +2,8 @@
   <div class="main font-body">
     <TheHeader />
     <div class="main-content">
-    <Nuxt />
+      <Nuxt />
     </div>
-    <!-- <TheFooter /> -->
+    <TheFooter />
   </div>
 </template>

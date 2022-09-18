@@ -5,6 +5,7 @@
     <Features />
     <Price />
     <TheCta />
+    <HowItWorks />
   </div>
 </template>
 
