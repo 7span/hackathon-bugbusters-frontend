@@ -67,12 +67,14 @@
                   >Combination</label
                 >
                 <div class="block sm:flex items-center sm:-mt-3">
-                  <div class="flex items-center">
+                  <div class="flex flex-wrap sm:flex-none items-center">
                     <div
                       v-for="(item, index) in combinations"
                       :key="index"
                       class="custom-checkbox"
-                      :class="index !== 0 ? 'ml-5' : ''"
+                      :class="
+                        index !== 0 ? 'p-2 sm:p-0 sm:ml-5' : 'p-2 sm:p-0 '
+                      "
                     >
                       <input
                         type="checkbox"
@@ -105,6 +107,7 @@
                       sm:mt-0
                     "
                     type="submit"
+                    :class="main_url == '' ? 'cursor-not-allowed' : ''"
                   >
                     <!-- @click="generate" -->
                     <IconesLoader
@@ -206,18 +209,21 @@
           </p>
         </div>
       </div>
+      <UrlList />
     </div>
   </div>
 </template>
 <script>
-// import QrcodeVue from "qrcode.vue";
+import { mapGetters } from "vuex";
+import UrlList from "./UrlList.vue";
+
 export default {
   data() {
     return {
       main_url: "",
       user_id: "",
       barCode: "",
-      format: [],
+      format: ['random'],
       combinations: [
         {
           label: "A-Z",
@@ -231,10 +237,10 @@ export default {
           label: "0-9",
           value: "digits",
         },
-        {
-          label: "Random",
-          value: "random",
-        },
+          {
+            label: "Random",
+            value: "random",
+          },
       ],
       isGenerated: false,
       isLoader: false,
@@ -242,24 +248,33 @@ export default {
     };
   },
   components: {
-    // QrcodeVue,
+    UrlList,
+  },
+  computed: {
+    ...mapGetters(["getUser"]),
   },
   methods: {
     generate() {
       if (this.main_url !== "") {
         this.isLoader = true;
+        if (this.getUser) {
+          this.user_id = this.getUser.id;
+        }
         this.$axios
           .post("generate-short-url", {
             main_url: this.main_url,
             user_id: this.user_id,
             format: this.format,
           })
+          .then((res) => res.data.data)
           .then((response) => {
             const data = response.data.data;
             this.isGenerated = true;
             this.isLoader = false;
             this.shortLink = data.short_url;
             this.barCode = data.barcode;
+            this.isGenerated = true;
+            this.isLoader = false;
             // this.$toast.success(
             //   "Login Successful. Welcome to TinyMiny Url Shortener."
             // );

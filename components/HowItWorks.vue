@@ -10,7 +10,7 @@
 
       <div class="max-w-3xl mx-auto p-4 rounded-xl shadow-2xl mt-10">
         <client-only>
-          <video controls class="w-full">
+          <video controls class="w-full" poster="/images/video-banner.jpeg">
             <source src="/images/tiny-miny-video.mp4" type="video/mp4" />
           </video>
         </client-only>

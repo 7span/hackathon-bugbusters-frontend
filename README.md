@@ -1,4 +1,11 @@
-# tiny-miny
+# About tinyminy
+
+Using this project, you can generate the short URL from the long URL. tiny miny is a software to shorten a URL or reduce a link. Use our URL shortener to create a shortened link making it easy to remember.
+
+## Technology used
+
+Nuxt2
+Tailwind css
 
 ## Build Setup
 
